@@ -1,0 +1,11 @@
+export { Hero } from "./Hero";
+export { TrustBar } from "./TrustBar";
+export type { TrustBarProps, TrustStatItem } from "./TrustBar";
+export { ProcessTimeline } from "./ProcessTimeline";
+export { WhyZikora } from "./WhyZikora";
+export { CourseCard } from "./CourseCard";
+export type { CourseCardProps } from "./CourseCard";
+export { FeaturedCourses } from "./FeaturedCourses";
+export { BigStatement } from "./BigStatement";
+export { Testimonials } from "./Testimonials";
+export { FinalCtaBanner } from "./FinalCtaBanner";

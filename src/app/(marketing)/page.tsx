@@ -1,33 +1,61 @@
+import type { Metadata } from "next";
+import {
+  Hero,
+  TrustBar,
+  ProcessTimeline,
+  WhyZikora,
+  FeaturedCourses,
+  BigStatement,
+  Testimonials,
+  FinalCtaBanner,
+} from "@/components/marketing";
+
+export const metadata: Metadata = {
+  title: "الرئيسية — ذاكر صح وابقى الأول في ثانويتك",
+  description:
+    "منصة Zikora للتعليم الإلكتروني في مصر — كورسات معتمدة، فيديوهات محمية، تصحيح آلي للامتحانات، وتواصل أسبوعي تلقائي مع ولي الأمر عبر الواتساب.",
+};
+
 /**
- * Homepage — temporary placeholder.
+ * Marketing Homepage — Server Component.
+ * Assembles all 8 homepage sections in exact sequence:
+ * 1. Hero
+ * 2. TrustBar
+ * 3. ProcessTimeline
+ * 4. WhyZikora (Bento Grid)
+ * 5. FeaturedCourses
+ * 6. BigStatement (Dark section with giant faint 0% numeral)
+ * 7. Testimonials
+ * 8. FinalCtaBanner
  *
- * الصفحة الرئيسية ستُبنى في تاسك منفصل بعد استلام التصميم.
- * الـ Header والـ Footer يظهران تلقائيًا من الـ (marketing)/layout.tsx
+ * Header and Footer are automatically provided by (marketing)/layout.tsx.
  */
 export default function HomePage() {
   return (
-    <div className="flex flex-1 flex-col items-center justify-center min-h-[60vh] text-center px-4">
-      <div className="space-y-6 max-w-lg">
-        {/* Logo mark */}
-        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-[var(--radius-xl)] bg-primary shadow-glow">
-          <span className="text-white text-2xl font-bold select-none">Z</span>
-        </div>
+    <div className="flex flex-col min-h-screen overflow-x-hidden">
+      {/* 1. Hero Section */}
+      <Hero />
 
-        <div className="space-y-3">
-          <h1 className="text-4xl font-bold tracking-tight text-foreground">
-            مرحبًا بك في{" "}
-            <span className="text-primary">Zikora</span>
-          </h1>
-          <p className="text-lg text-foreground-muted">
-            منصة التعليم الإلكتروني — الصفحة الرئيسية قيد الإنشاء.
-          </p>
-        </div>
+      {/* 2. Trust Bar */}
+      <TrustBar />
 
-        <div className="inline-flex items-center gap-2 rounded-full border border-border bg-background-subtle px-4 py-2 text-sm text-foreground-muted">
-          <span className="h-2 w-2 rounded-full bg-warning animate-pulse" aria-hidden="true" />
-          قيد التطوير — سيتم إضافة التصميم الكامل قريبًا
-        </div>
-      </div>
+      {/* 3. Our Process — Step-by-step Timeline */}
+      <ProcessTimeline />
+
+      {/* 4. Why Zikora — Bento Grid */}
+      <WhyZikora />
+
+      {/* 5. Featured Courses */}
+      <FeaturedCourses />
+
+      {/* 6. Big Statement Section */}
+      <BigStatement />
+
+      {/* 7. Student & Parent Testimonials */}
+      <Testimonials />
+
+      {/* 8. Final Call to Action Banner */}
+      <FinalCtaBanner />
     </div>
   );
 }

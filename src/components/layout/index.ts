@@ -1,4 +1,3 @@
 // Layout components barrel export
-export { Header } from "./Header";
-export { Footer } from "./Footer";
-export { Navigation } from "./Navigation";
+export * from "./marketing";
+export * from "./dashboard";

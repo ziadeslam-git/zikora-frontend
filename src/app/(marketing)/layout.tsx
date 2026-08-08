@@ -1,5 +1,4 @@
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
+import { Header, Footer } from "@/components/layout/marketing";
 
 /**
  * Marketing layout — wraps public-facing pages (Home, Courses, About, etc.).

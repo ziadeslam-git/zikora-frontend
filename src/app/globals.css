@@ -1,26 +1,205 @@
 @import "tailwindcss";
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   ZIKORA DESIGN SYSTEM — globals.css
+   Built on the official Zikora color palette (Aug 2026 references).
+   ───────────────────────────────────────────────────────────────────────────
+   Architecture:
+   1. CSS custom properties in :root — source of truth for all values
+   2. @theme inline — maps CSS vars → Tailwind v4 utility classes
+   3. Base reset & global styles
+   4. Custom utility classes (.bg-brand-gradient, .glass, etc.)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ─── 1. CSS Custom Properties (Design Tokens) ───────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* ── Brand Orange Tonal Scale ─────────────────────────────────────────── */
+  /* Anchors: 500 = #FC5A05 (official), 900 = #491900 (gradient end, official) */
+  --orange-50:  #FFF5EF;
+  --orange-100: #FFE0CC;
+  --orange-200: #FFC09A;
+  --orange-300: #FF9864;
+  --orange-400: #FD7633;
+  --orange-500: #FC5A05;  /* ★ BRAND ORANGE */
+  --orange-600: #CF4804;
+  --orange-700: #A23803;
+  --orange-800: #752801;
+  --orange-900: #491900;  /* ★ GRADIENT END */
+
+  /* ── Brand Gradient ───────────────────────────────────────────────────── */
+  --gradient-brand: linear-gradient(135deg, #FC5A05 0%, #491900 100%);
+
+  /* ── Core Brand Values ────────────────────────────────────────────────── */
+  --ink:        #141414;  /* Primary text & dark backgrounds (NOT #000) */
+  --base-white: #F9F9F9;  /* Page & card backgrounds (NOT #fff) */
+
+  /* ── Neutral Scale ────────────────────────────────────────────────────── */
+  /* Anchors from palette: Light Gray=#989795, Grey=#646464, Dark Gray=#333333 */
+  --neutral-50:  #F9F9F9;
+  --neutral-100: #EFEFEF;
+  --neutral-200: #DCDCDC;
+  --neutral-300: #C0BFBD;
+  --neutral-400: #989795;  /* ★ Light Gray (palette) */
+  --neutral-500: #7F7D7B;
+  --neutral-600: #646464;  /* ★ Grey (palette) */
+  --neutral-700: #494949;
+  --neutral-800: #333333;  /* ★ Dark Gray (palette) */
+  --neutral-900: #141414;  /* = Ink */
+
+  /* ── Semantic Colors ──────────────────────────────────────────────────── */
+  /* UX standards — not in palette file, used for status indicators only */
+  --success: #22C55E;
+  --danger:  #EF4444;
+  --warning: #F59E0B;  /* ⚠️ Close to brand orange — always pair with icon */
+
+  /* ── Typography ───────────────────────────────────────────────────────── */
+  /* These vars are populated by next/font/google in layout.tsx */
+  --font-arabic: var(--font-cairo, "Cairo", system-ui, sans-serif);
+  --font-latin:  var(--font-inter, "Inter", "Segoe UI", system-ui, sans-serif);
+
+  /* ── Shadows (Soft Elevation — matches Donezo/Nexus references) ─────── */
+  --shadow-sm: 0 1px 2px rgba(20, 20, 20, 0.04);
+  --shadow-md: 0 4px 12px rgba(20, 20, 20, 0.06);
+  --shadow-lg: 0 12px 32px rgba(20, 20, 20, 0.10);
+  --shadow-glow: 0 0 24px rgba(252, 90, 5, 0.30);
 }
 
+/* ─── 2. Tailwind v4 @theme — Maps CSS vars → Tailwind Utilities ─────────── */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Orange tonal scale → bg-orange-*, text-orange-*, border-orange-* */
+  --color-orange-50:  var(--orange-50);
+  --color-orange-100: var(--orange-100);
+  --color-orange-200: var(--orange-200);
+  --color-orange-300: var(--orange-300);
+  --color-orange-400: var(--orange-400);
+  --color-orange-500: var(--orange-500);
+  --color-orange-600: var(--orange-600);
+  --color-orange-700: var(--orange-700);
+  --color-orange-800: var(--orange-800);
+  --color-orange-900: var(--orange-900);
+
+  /* Brand semantic aliases → bg-ink, text-base-white, etc. */
+  --color-ink:        var(--ink);
+  --color-base-white: var(--base-white);
+
+  /* Neutral scale → bg-neutral-*, text-neutral-*, border-neutral-* */
+  --color-neutral-50:  var(--neutral-50);
+  --color-neutral-100: var(--neutral-100);
+  --color-neutral-200: var(--neutral-200);
+  --color-neutral-300: var(--neutral-300);
+  --color-neutral-400: var(--neutral-400);
+  --color-neutral-500: var(--neutral-500);
+  --color-neutral-600: var(--neutral-600);
+  --color-neutral-700: var(--neutral-700);
+  --color-neutral-800: var(--neutral-800);
+  --color-neutral-900: var(--neutral-900);
+
+  /* Semantic → bg-success, text-danger, bg-warning */
+  --color-success: var(--success);
+  --color-danger:  var(--danger);
+  --color-warning: var(--warning);
+
+  /* Fonts → font-arabic, font-latin */
+  --font-arabic: var(--font-arabic);
+  --font-latin:  var(--font-latin);
+
+  /* Shadows — override Tailwind defaults with our soft elevation */
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ─── 3. Custom Utility Classes ──────────────────────────────────────────── */
+
+/** Brand gradient background — sparingly on hero CTAs + one highlighted card per screen */
+.bg-brand-gradient {
+  background: var(--gradient-brand);
+}
+
+/** Orange glow shadow — for logo mark and hero CTA buttons */
+.shadow-glow-orange {
+  box-shadow: var(--shadow-glow);
+}
+
+/** Glassmorphism — sticky header on scroll */
+.glass {
+  background: rgba(249, 249, 249, 0.80);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* ─── 4. Base Reset & Global Styles ──────────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--base-white);
+  color: var(--ink);
+  font-family: var(--font-arabic);
+  line-height: 1.6;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Headings ─────────────────────────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+p {
+  color: var(--ink);
+}
+
+/* ── Links ────────────────────────────────────────────────────────────────── */
+a {
+  color: var(--orange-500);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+a:hover {
+  color: var(--orange-600);
+}
+
+/* ── Focus Visible (Accessibility) ───────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--orange-500);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ── Selection ────────────────────────────────────────────────────────────── */
+::selection {
+  background-color: var(--orange-100);
+  color: var(--orange-900);
+}
+
+/* ── Scrollbar (Webkit) ───────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--neutral-100);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--neutral-300);
+  border-radius: 999px;
+  transition: background 0.15s;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--neutral-400);
 }

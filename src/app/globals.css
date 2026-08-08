@@ -1,14 +1,10 @@
-/* Google Fonts — Cairo (Arabic) + Inter (Latin/Numbers)
-   Loaded at browser runtime — no build-time network dependency.
-   If build environment has Google Fonts access, prefer next/font/google in layout.tsx instead. */
 @import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap");
 
 @import "tailwindcss";
 
-
 /* ═══════════════════════════════════════════════════════════════════════════
    ZIKORA DESIGN SYSTEM — globals.css
-   Built on the official Zikora color palette (Aug 2026 references).
+   High-converting, vibrant design system for Zikora E-Learning Platform.
    ───────────────────────────────────────────────────────────────────────────
    Architecture:
    1. CSS custom properties in :root — source of truth for all values
@@ -19,60 +15,58 @@
 
 /* ─── 1. CSS Custom Properties (Design Tokens) ───────────────────────────── */
 :root {
-  /* ── Brand Orange Tonal Scale ─────────────────────────────────────────── */
-  /* Anchors: 500 = #FC5A05 (official), 900 = #491900 (gradient end, official) */
+  /* ── Brand Orange Tonal Scale — Vibrant Electric Scale ───────────────── */
   --orange-50:  #FFF5EF;
-  --orange-100: #FFE0CC;
-  --orange-200: #FFC09A;
-  --orange-300: #FF9864;
-  --orange-400: #FD7633;
-  --orange-500: #FC5A05;  /* ★ BRAND ORANGE */
-  --orange-600: #CF4804;
-  --orange-700: #A23803;
-  --orange-800: #752801;
-  --orange-900: #491900;  /* ★ GRADIENT END */
+  --orange-100: #FFE4D6;
+  --orange-200: #FFC4AB;
+  --orange-300: #FF9875;
+  --orange-400: #FF7042;
+  --orange-500: #FF5500;  /* ★ PRIMARY ELECTRIC BRAND ORANGE */
+  --orange-600: #E04400;  /* Rich vibrant hover */
+  --orange-700: #B83300;
+  --orange-800: #8F2500;
+  --orange-900: #5C1500;
 
-  /* ── Brand Gradient ───────────────────────────────────────────────────── */
-  --gradient-brand: linear-gradient(135deg, #FC5A05 0%, #491900 100%);
+  /* ── Premium Brand Gradient — Vibrant, Zero Muddy Brown ──────────────── */
+  --gradient-brand: linear-gradient(135deg, #FF6B00 0%, #E03E00 100%);
+  --gradient-brand-subtle: linear-gradient(135deg, #FFF5EF 0%, #FFEBE0 100%);
+  --gradient-dark: linear-gradient(135deg, #1C1917 0%, #0C0A09 100%);
 
   /* ── Core Brand Values ────────────────────────────────────────────────── */
-  --ink:        #141414;  /* Primary text & dark backgrounds (NOT #000) */
-  --base-white: #F9F9F9;  /* Page & card backgrounds (NOT #fff) */
+  --ink:        #121316;  /* Rich, crisp dark background & primary text */
+  --base-white: #FFFFFF;  /* Card & component background */
+  --page-bg:   #FAF8F5;  /* Warm, rich page background — eliminates flat white look */
 
   /* ── Neutral Scale ────────────────────────────────────────────────────── */
-  /* Anchors from palette: Light Gray=#989795, Grey=#646464, Dark Gray=#333333 */
-  --neutral-50:  #F9F9F9;
-  --neutral-100: #EFEFEF;
-  --neutral-200: #DCDCDC;
-  --neutral-300: #C0BFBD;
-  --neutral-400: #989795;  /* ★ Light Gray (palette) */
-  --neutral-500: #7F7D7B;
-  --neutral-600: #646464;  /* ★ Grey (palette) */
-  --neutral-700: #494949;
-  --neutral-800: #333333;  /* ★ Dark Gray (palette) */
-  --neutral-900: #141414;  /* = Ink */
+  --neutral-50:  #FAFAFA;
+  --neutral-100: #F4F4F5;
+  --neutral-200: #E4E4E7;
+  --neutral-300: #D4D4D8;
+  --neutral-400: #A1A1AA;
+  --neutral-500: #71717A;
+  --neutral-600: #52525B;
+  --neutral-700: #3F3F46;
+  --neutral-800: #27272A;
+  --neutral-900: #121316;
 
   /* ── Semantic Colors ──────────────────────────────────────────────────── */
-  /* UX standards — not in palette file, used for status indicators only */
-  --success: #22C55E;
+  --success: #10B981;
   --danger:  #EF4444;
-  --warning: #F59E0B;  /* ⚠️ Close to brand orange — always pair with icon */
+  --warning: #F59E0B;
 
   /* ── Typography ───────────────────────────────────────────────────────── */
-  /* These vars are populated by next/font/google in layout.tsx */
   --font-arabic: var(--font-cairo, "Cairo", system-ui, sans-serif);
-  --font-latin:  var(--font-inter, "Inter", "Segoe UI", system-ui, sans-serif);
+  --font-latin:  var(--font-inter, "Inter", system-ui, sans-serif);
 
-  /* ── Shadows (Soft Elevation — matches Donezo/Nexus references) ─────── */
-  --shadow-sm: 0 1px 2px rgba(20, 20, 20, 0.04);
-  --shadow-md: 0 4px 12px rgba(20, 20, 20, 0.06);
-  --shadow-lg: 0 12px 32px rgba(20, 20, 20, 0.10);
-  --shadow-glow: 0 0 24px rgba(252, 90, 5, 0.30);
+  /* ── Shadows & Elevation ─────────────────────────────────────────────── */
+  --shadow-sm: 0 1px 3px rgba(18, 19, 22, 0.05), 0 1px 2px rgba(18, 19, 22, 0.03);
+  --shadow-md: 0 4px 16px rgba(18, 19, 22, 0.08), 0 2px 4px rgba(18, 19, 22, 0.04);
+  --shadow-lg: 0 12px 36px rgba(18, 19, 22, 0.12), 0 4px 8px rgba(18, 19, 22, 0.06);
+  --shadow-glow: 0 4px 20px rgba(255, 85, 0, 0.35);
 }
 
-/* ─── 2. Tailwind v4 @theme — Maps CSS vars → Tailwind Utilities ─────────── */
+/* ─── 2. Tailwind v4 @theme ─────────────────────────────────────────────── */
 @theme inline {
-  /* Orange tonal scale → bg-orange-*, text-orange-*, border-orange-* */
   --color-orange-50:  var(--orange-50);
   --color-orange-100: var(--orange-100);
   --color-orange-200: var(--orange-200);
@@ -84,11 +78,9 @@
   --color-orange-800: var(--orange-800);
   --color-orange-900: var(--orange-900);
 
-  /* Brand semantic aliases → bg-ink, text-base-white, etc. */
   --color-ink:        var(--ink);
   --color-base-white: var(--base-white);
 
-  /* Neutral scale → bg-neutral-*, text-neutral-*, border-neutral-* */
   --color-neutral-50:  var(--neutral-50);
   --color-neutral-100: var(--neutral-100);
   --color-neutral-200: var(--neutral-200);
@@ -100,16 +92,13 @@
   --color-neutral-800: var(--neutral-800);
   --color-neutral-900: var(--neutral-900);
 
-  /* Semantic → bg-success, text-danger, bg-warning */
   --color-success: var(--success);
   --color-danger:  var(--danger);
   --color-warning: var(--warning);
 
-  /* Fonts → font-arabic, font-latin */
   --font-arabic: var(--font-arabic);
   --font-latin:  var(--font-latin);
 
-  /* Shadows — override Tailwind defaults with our soft elevation */
   --shadow-sm: var(--shadow-sm);
   --shadow-md: var(--shadow-md);
   --shadow-lg: var(--shadow-lg);
@@ -117,21 +106,19 @@
 
 /* ─── 3. Custom Utility Classes ──────────────────────────────────────────── */
 
-/** Brand gradient background — sparingly on hero CTAs + one highlighted card per screen */
 .bg-brand-gradient {
   background: var(--gradient-brand);
 }
 
-/** Orange glow shadow — for logo mark and hero CTA buttons */
 .shadow-glow-orange {
   box-shadow: var(--shadow-glow);
 }
 
-/** Glassmorphism — sticky header on scroll */
+/* Glassmorphism — fixed backdrop-filter order for CSS linter */
 .glass {
-  background: rgba(249, 249, 249, 0.80);
-  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.85);
   -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
 }
 
 /* ─── 4. Base Reset & Global Styles ──────────────────────────────────────── */
@@ -149,7 +136,7 @@ html {
 }
 
 body {
-  background-color: var(--base-white);
+  background-color: var(--page-bg);
   color: var(--ink);
   font-family: var(--font-arabic);
   line-height: 1.6;
@@ -158,9 +145,8 @@ body {
   flex-direction: column;
 }
 
-/* ── Headings ─────────────────────────────────────────────────────────────── */
 h1, h2, h3, h4, h5, h6 {
-  line-height: 1.2;
+  line-height: 1.25;
   font-weight: 700;
   letter-spacing: -0.02em;
   color: var(--ink);
@@ -170,7 +156,6 @@ p {
   color: var(--ink);
 }
 
-/* ── Links ────────────────────────────────────────────────────────────────── */
 a {
   color: var(--orange-500);
   text-decoration: none;
@@ -180,32 +165,13 @@ a:hover {
   color: var(--orange-600);
 }
 
-/* ── Focus Visible (Accessibility) ───────────────────────────────────────── */
 :focus-visible {
   outline: 2px solid var(--orange-500);
   outline-offset: 2px;
   border-radius: 4px;
 }
 
-/* ── Selection ────────────────────────────────────────────────────────────── */
 ::selection {
   background-color: var(--orange-100);
   color: var(--orange-900);
-}
-
-/* ── Scrollbar (Webkit) ───────────────────────────────────────────────────── */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-::-webkit-scrollbar-track {
-  background: var(--neutral-100);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--neutral-300);
-  border-radius: 999px;
-  transition: background 0.15s;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--neutral-400);
 }

@@ -1,4 +1,10 @@
+/* Google Fonts — Cairo (Arabic) + Inter (Latin/Numbers)
+   Loaded at browser runtime — no build-time network dependency.
+   If build environment has Google Fonts access, prefer next/font/google in layout.tsx instead. */
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap");
+
 @import "tailwindcss";
+
 
 /* ═══════════════════════════════════════════════════════════════════════════
    ZIKORA DESIGN SYSTEM — globals.css

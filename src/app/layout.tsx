@@ -1,27 +1,17 @@
 import type { Metadata } from "next";
-import { Cairo, Inter } from "next/font/google";
 import "./globals.css";
 
 /**
- * Cairo — Arabic content (400 / 500 / 600 / 700 / 800 weights)
- * Exposes --font-cairo CSS variable consumed by globals.css @theme.
+ * Fonts: Cairo (Arabic) + Inter (Latin/Numbers)
+ *
+ * Loaded via CSS @import in globals.css instead of next/font/google.
+ * Reason: The build/dev environment has no access to fonts.googleapis.com.
+ * The fonts load correctly in the user's browser at runtime.
+ *
+ * When the environment has Google Fonts access, switch back to next/font/google:
+ *   import { Cairo, Inter } from "next/font/google";
+ *   const cairo = Cairo({ variable: "--font-cairo", subsets: ["arabic", "latin"], ... });
  */
-const cairo = Cairo({
-  variable: "--font-cairo",
-  subsets: ["arabic", "latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  display: "swap",
-});
-
-/**
- * Inter — Latin text, numbers, prices, course grades.
- * Exposes --font-inter CSS variable consumed by globals.css @theme.
- */
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: {
@@ -47,14 +37,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="ar"
-      dir="rtl"
-      className={`${cairo.variable} ${inter.variable} h-full`}
-    >
-      <body className="min-h-full flex flex-col antialiased font-arabic">
-        {children}
-      </body>
+    <html lang="ar" dir="rtl" className="h-full">
+      <body className="min-h-full flex flex-col antialiased">{children}</body>
     </html>
   );
 }

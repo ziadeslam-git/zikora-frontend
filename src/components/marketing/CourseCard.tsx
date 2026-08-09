@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Star, BookOpen } from "lucide-react";
+import { Star, BookOpen, CheckCircle2, Play } from "lucide-react";
 
 export interface CourseCardProps {
   id: string;
@@ -11,12 +11,13 @@ export interface CourseCardProps {
   rating: number;
   lessonsCount?: number;
   thumbnailUrl?: string;
+  badgeTag?: string;
 }
 
 /**
  * CourseCard — Reusable Course Card component (Server Component).
- * Rendered in 16:9 thumbnail ratio with subject badge, teacher avatar, course title,
- * price, and star ratings.
+ * High-converting card design with 16:9 thumbnail ratio, teacher verification badge,
+ * price tag, rating stars, and smooth hover interaction.
  */
 export function CourseCard({
   id,
@@ -28,17 +29,18 @@ export function CourseCard({
   rating,
   lessonsCount = 12,
   thumbnailUrl,
+  badgeTag = "مُتاح الآن",
 }: CourseCardProps) {
   const formattedPrice =
-    typeof price === "number" ? `£ ${price.toLocaleString("ar-EG")}` : price;
+    typeof price === "number" ? `ج.م ${price.toLocaleString("ar-EG")}` : price;
 
   return (
     <Link
       href={`/courses/${id}`}
-      className="group flex flex-col bg-white rounded-2xl border border-neutral-200/90 overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-200"
+      className="group flex flex-col bg-white rounded-2xl border border-neutral-200/90 overflow-hidden hover:border-orange-300 hover:shadow-lg hover:-translate-y-1.5 transition-all duration-300"
     >
       {/* Thumbnail Aspect Ratio 16:9 */}
-      <div className="relative aspect-video w-full bg-gradient-to-br from-orange-100 to-orange-200 overflow-hidden flex items-center justify-center">
+      <div className="relative aspect-video w-full bg-gradient-to-br from-orange-500/10 via-orange-100/60 to-orange-50 overflow-hidden flex items-center justify-center border-b border-neutral-100">
         {thumbnailUrl ? (
           // eslint-disable-next-next/no-img-element
           <img
@@ -47,24 +49,32 @@ export function CourseCard({
             className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300"
           />
         ) : (
-          <div className="flex flex-col items-center gap-2 text-orange-500/80">
-            <BookOpen className="h-10 w-10" />
-            <span className="text-xs font-semibold text-neutral-600">{subjectLabel}</span>
+          <div className="flex flex-col items-center gap-2 text-orange-500">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white shadow-xs group-hover:scale-110 transition-transform">
+              <BookOpen className="h-6 w-6 text-orange-500" />
+            </div>
+            <span className="text-xs font-bold text-neutral-600 font-latin">{subjectLabel}</span>
           </div>
         )}
 
         {/* Subject Label Badge */}
-        <span className="absolute top-3 right-3 bg-white/90 backdrop-blur-xs rounded-full px-3 py-1 text-xs font-semibold text-ink shadow-xs">
+        <span className="absolute top-3 end-3 bg-white/95 backdrop-blur-xs rounded-full px-3 py-1 text-xs font-bold text-ink shadow-xs border border-neutral-200/60">
           {subjectLabel}
+        </span>
+
+        {/* Live / Status Badge */}
+        <span className="absolute bottom-3 start-3 bg-ink/80 text-white backdrop-blur-xs rounded-md px-2.5 py-0.5 text-[11px] font-medium flex items-center gap-1">
+          <Play className="h-2.5 w-2.5 fill-orange-400 text-orange-400" />
+          {badgeTag}
         </span>
       </div>
 
       {/* Card Content Body */}
       <div className="flex flex-1 flex-col justify-between p-5 space-y-4">
-        <div className="space-y-2">
+        <div className="space-y-2.5">
           {/* Teacher Row */}
           <div className="flex items-center gap-2">
-            <div className="flex h-7 w-7 items-center justify-center rounded-full bg-orange-100 text-orange-600 font-bold text-xs shrink-0 border border-orange-200">
+            <div className="flex h-7 w-7 items-center justify-center rounded-full bg-orange-500 text-white font-bold text-xs shrink-0 ring-1 ring-orange-200">
               {teacherAvatarUrl ? (
                 // eslint-disable-next-next/no-img-element
                 <img
@@ -76,13 +86,14 @@ export function CourseCard({
                 teacherName.charAt(0)
               )}
             </div>
-            <span className="text-xs font-medium text-neutral-600 truncate">
+            <span className="text-xs font-semibold text-neutral-700 truncate">
               {teacherName}
             </span>
+            <CheckCircle2 className="h-3.5 w-3.5 text-orange-500 shrink-0" aria-label="معلم معتمد" />
           </div>
 
           {/* Course Title */}
-          <h3 className="text-base font-bold text-ink line-clamp-2 group-hover:text-orange-500 transition-colors leading-snug">
+          <h3 className="text-base font-bold text-ink line-clamp-2 group-hover:text-orange-600 transition-colors leading-snug">
             {title}
           </h3>
         </div>
@@ -90,15 +101,15 @@ export function CourseCard({
         {/* Bottom Row: Price & Rating */}
         <div className="flex items-center justify-between pt-3 border-t border-neutral-100">
           <div className="flex items-baseline gap-1">
-            <span className="text-lg font-bold text-orange-600 font-latin">
+            <span className="text-base font-extrabold text-orange-600 font-latin">
               {formattedPrice}
             </span>
           </div>
 
-          <div className="flex items-center gap-1">
-            <Star className="h-4 w-4 fill-amber-400 text-amber-400 shrink-0" />
+          <div className="flex items-center gap-1.5 bg-amber-50 px-2 py-1 rounded-lg border border-amber-200/60">
+            <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-400 shrink-0" />
             <span className="text-xs font-bold text-ink font-latin">{rating.toFixed(1)}</span>
-            <span className="text-xs text-neutral-400">({lessonsCount} درس)</span>
+            <span className="text-[11px] text-neutral-400 font-latin">({lessonsCount})</span>
           </div>
         </div>
       </div>

@@ -88,7 +88,7 @@ export function DashboardSidebar({
         }
       }
     } catch {
-      // Ignore localStorage errors (e.g. SSR or restricted context)
+      // Ignore localStorage errors
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -122,10 +122,10 @@ export function DashboardSidebar({
         className={cn(
           "group relative flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-150 select-none",
           isActive
-            ? "bg-orange-500/10 text-orange-600 font-semibold"
+            ? "bg-accent-500/10 text-accent-500 font-semibold"
             : item.isLogout
-              ? "text-danger hover:bg-red-50 hover:text-danger"
-              : "text-neutral-700 hover:bg-neutral-100 hover:text-ink",
+              ? "text-danger-cta hover:bg-red-500/10 hover:text-danger-cta"
+              : "text-text-secondary hover:bg-bg-surface-2 hover:text-ink",
           isCollapsed && "justify-center px-0",
         )}
       >
@@ -133,17 +133,17 @@ export function DashboardSidebar({
           className={cn(
             "h-5 w-5 shrink-0 transition-colors",
             isActive
-              ? "text-orange-600"
+              ? "text-accent-500"
               : item.isLogout
-                ? "text-danger"
-                : "text-neutral-500 group-hover:text-ink",
+                ? "text-danger-cta"
+                : "text-text-secondary group-hover:text-ink",
           )}
         />
         {!isCollapsed && <span className="truncate">{item.label}</span>}
 
         {/* Floating tooltip on hover when collapsed */}
         {isCollapsed && (
-          <div className="absolute start-full ms-2 hidden rounded-md bg-ink px-2.5 py-1 text-xs font-medium text-white shadow-md group-hover:block z-50 whitespace-nowrap">
+          <div className="absolute start-full ms-2 hidden rounded-md bg-ink px-2.5 py-1 text-xs font-medium text-bg-base shadow-md group-hover:block z-50 whitespace-nowrap">
             {item.label}
           </div>
         )}
@@ -154,7 +154,7 @@ export function DashboardSidebar({
   return (
     <aside
       className={cn(
-        "flex flex-col justify-between border-e border-neutral-200 bg-base-white transition-all duration-300 ease-in-out shrink-0",
+        "flex flex-col justify-between border-e border-border-theme bg-bg-surface transition-all duration-300 ease-in-out shrink-0",
         isCollapsed ? "w-[72px]" : "w-64",
         className,
       )}
@@ -162,12 +162,12 @@ export function DashboardSidebar({
     >
       <div className="flex flex-col">
         {/* Top Logo & Toggle */}
-        <div className="flex h-16 items-center justify-between px-4 border-b border-neutral-200">
+        <div className="flex h-16 items-center justify-between px-4 border-b border-border-theme">
           <Link
             href="/"
             className={cn("flex items-center gap-2 overflow-hidden", isCollapsed && "justify-center w-full")}
           >
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-orange-500 text-white font-bold font-latin shrink-0">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent-500 text-white font-bold font-latin shrink-0 shadow-glow-accent">
               Z
             </div>
             {!isCollapsed && (
@@ -181,7 +181,7 @@ export function DashboardSidebar({
             <button
               type="button"
               onClick={handleToggle}
-              className="p-1.5 text-neutral-400 hover:bg-neutral-100 hover:text-ink rounded-lg transition-colors"
+              className="p-1.5 text-text-secondary hover:bg-bg-surface-2 hover:text-ink rounded-lg transition-colors"
               aria-label="طي القائمة الجانبية"
             >
               <ChevronRight className="h-5 w-5 rtl:rotate-180" />
@@ -191,8 +191,8 @@ export function DashboardSidebar({
 
         {/* Role label badge */}
         {!isCollapsed && (
-          <div className="px-4 py-2.5 bg-neutral-100/60 border-b border-neutral-200">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-500">
+          <div className="px-4 py-2.5 bg-bg-surface-2/60 border-b border-border-theme">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-text-secondary">
               {role === "student" && "لوحة الطالب"}
               {role === "teacher" && "لوحة المعلم"}
               {role === "admin" && "لوحة المسؤول"}
@@ -203,19 +203,19 @@ export function DashboardSidebar({
         {/* Section 1: MENU */}
         <nav className="p-3 space-y-1" aria-label="القائمة الرئيسية">
           {!isCollapsed && (
-            <p className="px-3 pb-2 text-[11px] font-bold uppercase tracking-wider text-neutral-400">
+            <p className="px-3 pb-2 text-[11px] font-bold uppercase tracking-wider text-text-secondary">
               MENU
             </p>
           )}
           {menuLinks.map(renderLink)}
         </nav>
 
-        <div className="my-1 border-t border-neutral-200 mx-3" />
+        <div className="my-1 border-t border-border-theme mx-3" />
 
         {/* Section 2: GENERAL */}
         <nav className="p-3 space-y-1" aria-label="الإعدادات العامة">
           {!isCollapsed && (
-            <p className="px-3 pb-2 text-[11px] font-bold uppercase tracking-wider text-neutral-400">
+            <p className="px-3 pb-2 text-[11px] font-bold uppercase tracking-wider text-text-secondary">
               GENERAL
             </p>
           )}
@@ -225,11 +225,11 @@ export function DashboardSidebar({
 
       {/* Expand Toggle Button when collapsed */}
       {isCollapsed && (
-        <div className="p-3 border-t border-neutral-200 flex justify-center">
+        <div className="p-3 border-t border-border-theme flex justify-center">
           <button
             type="button"
             onClick={handleToggle}
-            className="p-2 text-neutral-500 hover:bg-neutral-100 hover:text-ink rounded-lg transition-colors"
+            className="p-2 text-text-secondary hover:bg-bg-surface-2 hover:text-ink rounded-lg transition-colors"
             aria-label="توسيع القائمة الجانبية"
           >
             <ChevronLeft className="h-5 w-5 rtl:rotate-180" />

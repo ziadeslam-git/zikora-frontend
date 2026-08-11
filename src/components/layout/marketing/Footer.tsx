@@ -35,20 +35,21 @@ const socialLinks = [
 ] as const;
 
 /**
- * Marketing Footer — Server Component (pure static, zero client JS).
- * Uses Zikora brand dark background (#141414 / bg-ink) and neutral-400 (#989795) text.
+ * Marketing Footer — Server Component.
+ * Dark section by design in both themes using bg-ink (#14162B in Light, #0A0A0A in Dark)
+ * and text-white/70 text.
  */
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="mt-auto border-t border-white/10 bg-[#141414] text-neutral-400">
+    <footer className="mt-auto border-t border-white/10 bg-ink text-white/70">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
           {/* Column 1: Logo + Short description + Social Icons */}
           <div className="space-y-4">
             <Link href="/" className="inline-flex items-center gap-2" aria-label="Zikora">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-orange-500 text-white font-bold font-latin">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent-500 text-white font-bold font-latin">
                 Z
               </div>
               <span className="text-xl font-bold tracking-tight text-white font-latin">
@@ -56,7 +57,7 @@ export function Footer() {
               </span>
             </Link>
 
-            <p className="text-sm text-neutral-400 leading-relaxed">
+            <p className="text-sm text-white/70 leading-relaxed">
               منصة Zikora للتعليم الإلكتروني — نوفر كورسات احترافية عالية الجودة
               بأسعار مناسبة لكل المتعلمين في الوطن العربي.
             </p>
@@ -69,7 +70,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/5 text-neutral-400 hover:bg-orange-500 hover:text-white transition-all duration-150"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/5 text-white/70 hover:bg-accent-500 hover:text-white transition-all duration-150"
                 >
                   <Icon className="h-4 w-4" aria-hidden="true" />
                 </a>
@@ -83,7 +84,7 @@ export function Footer() {
             <ul className="space-y-2.5 text-sm">
               {footerLinks.platform.links.map(({ label, href }) => (
                 <li key={href}>
-                  <Link href={href} className="hover:text-orange-500 transition-colors">
+                  <Link href={href} className="hover:text-accent-500 transition-colors">
                     {label}
                   </Link>
                 </li>
@@ -97,7 +98,7 @@ export function Footer() {
             <ul className="space-y-2.5 text-sm">
               {footerLinks.support.links.map(({ label, href }) => (
                 <li key={href}>
-                  <Link href={href} className="hover:text-orange-500 transition-colors">
+                  <Link href={href} className="hover:text-accent-500 transition-colors">
                     {label}
                   </Link>
                 </li>
@@ -115,9 +116,9 @@ export function Footer() {
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 hover:text-orange-500 transition-colors"
+                    className="flex items-center gap-2 hover:text-accent-500 transition-colors"
                   >
-                    <Icon className="h-4 w-4 text-orange-500 shrink-0" aria-hidden="true" />
+                    <Icon className="h-4 w-4 text-accent-500 shrink-0" aria-hidden="true" />
                     <span dir="ltr" className="font-latin">{label}</span>
                   </a>
                 </li>
@@ -127,7 +128,7 @@ export function Footer() {
         </div>
 
         {/* Bottom row */}
-        <div className="mt-12 border-t border-white/10 pt-6 text-center text-xs text-neutral-400 md:text-start">
+        <div className="mt-12 border-t border-white/10 pt-6 text-center text-xs text-white/50 md:text-start">
           <p>© {currentYear} Zikora. جميع الحقوق محفوظة.</p>
         </div>
       </div>

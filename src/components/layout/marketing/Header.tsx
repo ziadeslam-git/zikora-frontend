@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { HeaderScrollWrapper } from "./HeaderScrollWrapper";
 import { MobileMenuButton } from "./MobileMenuButton";
+import { ThemeToggle } from "@/components/layout/ThemeToggle";
 import { Button } from "@/components/ui/Button";
-import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 const navLinks = [
   { label: "الرئيسية", href: "/" },
@@ -13,8 +13,7 @@ const navLinks = [
 
 /**
  * Marketing Header — Server Component.
- * Fixed/sticky header with theme-aware navigation, theme toggle button (Light/Dark mode),
- * and client scroll wrapper.
+ * Dual-theme header using theme tokens exclusively.
  */
 export function Header() {
   return (
@@ -62,7 +61,7 @@ export function Header() {
           </Link>
         </div>
 
-        {/* Mobile Menu Trigger & Panel */}
+        {/* Mobile Menu Trigger & Panel (ThemeToggle stays visible on mobile) */}
         <div className="flex items-center gap-2 md:hidden">
           <ThemeToggle />
           <MobileMenuButton navLinks={navLinks} />

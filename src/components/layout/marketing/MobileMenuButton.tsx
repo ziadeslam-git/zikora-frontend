@@ -46,7 +46,7 @@ export function MobileMenuButton({ navLinks }: MobileMenuButtonProps) {
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="p-2 text-ink rounded-lg hover:bg-neutral-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500"
+        className="p-2 text-ink rounded-lg hover:bg-bg-surface-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-500"
         aria-label={isOpen ? "إغلاق القائمة" : "فتح القائمة"}
         aria-expanded={isOpen}
       >
@@ -66,7 +66,7 @@ export function MobileMenuButton({ navLinks }: MobileMenuButtonProps) {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
               onClick={() => setIsOpen(false)}
-              className="fixed inset-0 z-40 bg-ink/50 backdrop-blur-sm md:hidden"
+              className="fixed inset-0 z-40 bg-ink/60 backdrop-blur-sm md:hidden"
               aria-hidden="true"
             />
 
@@ -76,7 +76,7 @@ export function MobileMenuButton({ navLinks }: MobileMenuButtonProps) {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ duration: 0.25, ease: "easeOut" }}
-              className="fixed inset-y-0 end-0 z-50 w-full max-w-xs bg-base-white p-6 shadow-xl border-s border-neutral-200 flex flex-col justify-between md:hidden"
+              className="fixed inset-y-0 end-0 z-50 w-full max-w-xs bg-bg-base p-6 shadow-xl border-s border-border-theme flex flex-col justify-between md:hidden"
               role="dialog"
               aria-modal="true"
               aria-label="القائمة الرئيسية"
@@ -89,7 +89,7 @@ export function MobileMenuButton({ navLinks }: MobileMenuButtonProps) {
                     onClick={() => setIsOpen(false)}
                     className="flex items-center gap-2"
                   >
-                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-orange-500 text-white font-bold font-latin">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent-500 text-white font-bold font-latin">
                       Z
                     </div>
                     <span className="text-lg font-bold text-ink font-latin">Zikora</span>
@@ -97,7 +97,7 @@ export function MobileMenuButton({ navLinks }: MobileMenuButtonProps) {
                   <button
                     type="button"
                     onClick={() => setIsOpen(false)}
-                    className="p-2 text-neutral-600 rounded-lg hover:bg-neutral-100 transition-colors"
+                    className="p-2 text-text-secondary rounded-lg hover:bg-bg-surface-2 transition-colors"
                     aria-label="إغلاق القائمة"
                   >
                     <X className="h-5 w-5" />
@@ -111,7 +111,7 @@ export function MobileMenuButton({ navLinks }: MobileMenuButtonProps) {
                       key={link.href}
                       href={link.href}
                       onClick={() => setIsOpen(false)}
-                      className="px-3 py-2.5 rounded-lg text-base font-semibold text-ink hover:bg-orange-50 hover:text-orange-600 transition-colors"
+                      className="px-3 py-2.5 rounded-lg text-base font-semibold text-ink hover:bg-bg-surface-2 hover:text-accent-500 transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -120,7 +120,7 @@ export function MobileMenuButton({ navLinks }: MobileMenuButtonProps) {
               </div>
 
               {/* Action Buttons */}
-              <div className="flex flex-col gap-3 pt-6 border-t border-neutral-200">
+              <div className="flex flex-col gap-3 pt-6 border-t border-border-theme">
                 <Link href="/auth/login" onClick={() => setIsOpen(false)} className="w-full">
                   <Button variant="outline" size="md" className="w-full">
                     تسجيل الدخول

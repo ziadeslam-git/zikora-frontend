@@ -9,9 +9,8 @@ export interface HeaderScrollWrapperProps {
 }
 
 /**
- * HeaderScrollWrapper — Client Component wrapper for the Marketing Header shell.
- * Adds sticky glassmorphism styling (`bg-white/95 backdrop-blur-md shadow-sm`)
- * when window.scrollY > 80.
+ * HeaderScrollWrapper — Client Component wrapper for the Marketing Header.
+ * Adds backdrop blur, background opacity, and theme border once window.scrollY > 80.
  */
 export function HeaderScrollWrapper({
   children,
@@ -34,7 +33,7 @@ export function HeaderScrollWrapper({
       className={cn(
         "sticky top-0 z-50 w-full transition-all duration-300",
         isScrolled
-          ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-neutral-200/60"
+          ? "bg-bg-base/95 backdrop-blur-md border-b border-border-theme shadow-sm"
           : "bg-transparent",
         className,
       )}

@@ -12,26 +12,26 @@ export interface ScrollRevealProps {
 }
 
 /**
- * ScrollReveal — Smooth Motion Viewport Entrance Component ("use client").
- * Animates opacity and entrance offset when element scrolls into view.
+ * ScrollReveal — Ultra-lightweight 60fps Entrance Component ("use client").
+ * Triggers entrance immediately upon entering 1% of viewport for zero scroll lag.
  */
 export function ScrollReveal({
   children,
   direction = "up",
   delay = 0,
-  duration = 0.5,
+  duration = 0.3,
   className = "",
 }: ScrollRevealProps) {
   const getInitialPosition = () => {
     switch (direction) {
       case "up":
-        return { opacity: 0, y: 40 };
+        return { opacity: 0, y: 20 };
       case "down":
-        return { opacity: 0, y: -40 };
+        return { opacity: 0, y: -20 };
       case "left":
-        return { opacity: 0, x: -50 };
+        return { opacity: 0, x: -25 };
       case "right":
-        return { opacity: 0, x: 50 };
+        return { opacity: 0, x: 25 };
       case "none":
         return { opacity: 0 };
     }
@@ -41,11 +41,11 @@ export function ScrollReveal({
     <motion.div
       initial={getInitialPosition()}
       whileInView={{ opacity: 1, x: 0, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
+      viewport={{ once: true, amount: 0.01 }}
       transition={{
         duration,
         delay,
-        ease: [0.21, 0.47, 0.32, 0.98], // Buttery smooth cubic bezier
+        ease: [0.16, 1, 0.3, 1], // Fast responsive spring cubic-bezier
       }}
       className={className}
     >

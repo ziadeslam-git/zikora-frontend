@@ -45,7 +45,6 @@ export function PlayingState({
   const completionTrackedRef = useRef(false);
 
   const [showCompletionToast, setShowCompletionToast] = useState(false);
-  const [isPlayerReady, setIsPlayerReady] = useState(false);
 
   useEffect(() => {
     let trackingInterval: NodeJS.Timeout | null = null;
@@ -60,12 +59,10 @@ export function PlayingState({
           autoplay: 1,
           rel: 0,
           modestbranding: 1,
-          origin: typeof window !== "undefined" ? window.location.origin : "",
+          enablejsapi: 1,
+          playsinline: 1,
         },
         events: {
-          onReady: () => {
-            setIsPlayerReady(true);
-          },
           onStateChange: (event) => {
             // Check progress when video is playing
             if (event.data === window.YT.PlayerState.PLAYING) {
@@ -77,18 +74,20 @@ export function PlayingState({
                   }
 
                   const player = event.target;
-                  const currentTime = player.getCurrentTime();
-                  const duration = player.getDuration();
+                  if (typeof player.getCurrentTime === "function" && typeof player.getDuration === "function") {
+                    const currentTime = player.getCurrentTime();
+                    const duration = player.getDuration();
 
-                  if (duration > 0 && currentTime / duration >= 0.8) {
-                    completionTrackedRef.current = true;
-                    if (trackingInterval) clearInterval(trackingInterval);
-                    onViewCompletion();
-                    setShowCompletionToast(true);
+                    if (duration > 0 && currentTime / duration >= 0.8) {
+                      completionTrackedRef.current = true;
+                      if (trackingInterval) clearInterval(trackingInterval);
+                      onViewCompletion();
+                      setShowCompletionToast(true);
 
-                    toastTimeout = setTimeout(() => {
-                      setShowCompletionToast(false);
-                    }, 3500);
+                      toastTimeout = setTimeout(() => {
+                        setShowCompletionToast(false);
+                      }, 3500);
+                    }
                   }
                 }, 1000);
               }

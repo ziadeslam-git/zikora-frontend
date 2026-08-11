@@ -88,7 +88,7 @@ export function CourseHero({
           {/* Right / Protected Video Preview Area (Spans 5 cols on Desktop) */}
           <div className="lg:col-span-5 w-full">
             <ProtectedVideoPlayer
-              youtubeVideoId="dQw4w9WgXcQ"
+              youtubeVideoId="M7lc1UVf-VE"
               lectureId="course-preview-hero"
               thumbnailUrl="https://images.unsplash.com/photo-1532094349884-543bc11b234d?q=80&w=800&auto=format&fit=crop"
               isLocked={!isFreePreview}

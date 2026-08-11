@@ -1,13 +1,6 @@
 import Link from "next/link";
-import {
-  User,
-  Star,
-  Users,
-  Video,
-  Play,
-  Lock,
-  ChevronLeft,
-} from "lucide-react";
+import { User, Star, Users, Video, ChevronLeft } from "lucide-react";
+import { ProtectedVideoPlayer } from "@/components/video/ProtectedVideoPlayer";
 
 export interface CourseHeroProps {
   title: string;
@@ -22,8 +15,8 @@ export interface CourseHeroProps {
 
 /**
  * CourseHero — Course Details Hero Section (Server Component).
- * Dual-theme compliant: breadcrumbs, title, quick-info metrics, and video preview area
- * with free preview / locked state toggle.
+ * Dual-theme compliant: breadcrumbs, title, quick-info metrics, and ProtectedVideoPlayer
+ * embedded preview area (FR-5 DRM Protected YouTube Player).
  */
 export function CourseHero({
   title,
@@ -92,36 +85,17 @@ export function CourseHero({
             </div>
           </div>
 
-          {/* Right / Video Preview Area (Spans 5 cols on Desktop) */}
+          {/* Right / Protected Video Preview Area (Spans 5 cols on Desktop) */}
           <div className="lg:col-span-5 w-full">
-            <div className="relative aspect-video w-full rounded-2xl bg-bg-surface-2 border border-border-theme overflow-hidden shadow-lg flex items-center justify-center group">
-              {isFreePreview ? (
-                <>
-                  <div className="flex flex-col items-center gap-3 text-center z-10">
-                    <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-accent-500 text-white shadow-glow-accent group-hover:scale-110 transition-transform duration-200 cursor-pointer">
-                      <Play className="h-8 w-8 fill-white ms-1" />
-                    </div>
-                    <span className="inline-block rounded-full bg-bg-base/90 backdrop-blur-xs px-4 py-1.5 text-xs font-bold text-ink border border-border-theme shadow-xs">
-                      شاهد فيديو المعاينة المجاني 🍿
-                    </span>
-                  </div>
-
-                  <div className="absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent pointer-events-none" />
-                </>
-              ) : (
-                <div className="flex flex-col items-center gap-3 text-center p-6 z-10">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-bg-surface border border-border-theme text-text-secondary shadow-xs">
-                    <Lock className="h-7 w-7 text-accent-500" />
-                  </div>
-                  <span className="text-sm font-bold text-ink">
-                    اشترك الآن لمشاهدة محتوى الكورس
-                  </span>
-                  <p className="text-xs text-text-secondary max-w-xs">
-                    المحتوى محمي ومتاح فقط للطلاب المسجلين في هذه المادة
-                  </p>
-                </div>
-              )}
-            </div>
+            <ProtectedVideoPlayer
+              youtubeVideoId="dQw4w9WgXcQ"
+              lectureId="course-preview-hero"
+              thumbnailUrl="https://images.unsplash.com/photo-1532094349884-543bc11b234d?q=80&w=800&auto=format&fit=crop"
+              isLocked={!isFreePreview}
+              lockReason="not_enrolled"
+              viewsUsed={1}
+              viewsMax={3}
+            />
           </div>
         </div>
       </div>

@@ -3,25 +3,23 @@ import { cn } from "@/lib/utils";
 import type { ButtonHTMLAttributes } from "react";
 
 /**
- * Button — Zikora Design System
+ * Button — Zikora Dual Theme Design System
  *
  * Variants:
- *   primary  — solid brandOrange (#FC5A05), white text. Default CTA.
- *   gradient — brandGradient bg. SPARINGLY — Hero CTAs only (one per screen max).
- *   outline  — transparent bg, orange border. Secondary actions.
- *   ghost    — no border/bg. Tertiary actions (e.g., header "Login" link).
- *   danger   — red (#EF4444). Destructive actions only.
+ *   primary  — solid accent-500, white text. Default CTA.
+ *   gradient — brandGradient bg. Hero CTAs & highlighted cards.
+ *   outline  — transparent bg, accent border. Secondary actions.
+ *   ghost    — no border/bg. Tertiary actions.
+ *   danger   — danger-cta background. Destructive actions.
  *
- * Sizes: sm | md | lg
- * Loading: shows spinner, disables interaction.
+ * Theme-Aware: uses CSS custom properties via Tailwind @theme mapping.
  */
 const buttonVariants = cva(
-  // Base styles
   [
     "inline-flex items-center justify-center gap-2 shrink-0",
-    "font-semibold rounded-xl",           // rounded-xl = 12px (our "md" radius)
+    "font-semibold rounded-xl",
     "transition-all duration-200 ease-out",
-    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2",
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-500 focus-visible:ring-offset-2",
     "disabled:pointer-events-none disabled:opacity-50",
     "select-none cursor-pointer",
   ],
@@ -29,29 +27,28 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary: [
-          "bg-orange-500 text-white",
-          "hover:bg-orange-600 hover:shadow-md",
-          "active:scale-[0.97] active:bg-orange-700",
+          "bg-accent-500 text-white",
+          "hover:bg-accent-hover hover:shadow-sm",
+          "active:scale-[0.97]",
         ],
         gradient: [
-          // Brand gradient — reserved for hero CTAs and the one highlighted card per screen
-          "bg-brand-gradient text-white",
-          "hover:opacity-90 hover:shadow-glow-orange",
+          "bg-brand-gradient text-white shadow-glow-accent",
+          "hover:opacity-95",
           "active:scale-[0.97]",
         ],
         outline: [
-          "border border-orange-500 bg-transparent text-orange-500",
-          "hover:bg-orange-50 hover:border-orange-600 hover:text-orange-600",
+          "border border-accent-500 bg-transparent text-accent-500",
+          "hover:bg-bg-surface-2 hover:border-accent-hover hover:text-accent-hover",
           "active:scale-[0.97]",
         ],
         ghost: [
-          "bg-transparent text-neutral-800",
-          "hover:bg-neutral-100 hover:text-orange-500",
+          "bg-transparent text-ink",
+          "hover:bg-bg-surface-2 hover:text-accent-500",
           "active:scale-[0.97]",
         ],
         danger: [
-          "bg-danger text-white",
-          "hover:opacity-90 hover:shadow-md",
+          "bg-danger-cta text-white",
+          "hover:opacity-90 hover:shadow-sm",
           "active:scale-[0.97]",
         ],
       },

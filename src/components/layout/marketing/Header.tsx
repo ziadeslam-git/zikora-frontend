@@ -2,6 +2,7 @@ import Link from "next/link";
 import { HeaderScrollWrapper } from "./HeaderScrollWrapper";
 import { MobileMenuButton } from "./MobileMenuButton";
 import { Button } from "@/components/ui/Button";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 const navLinks = [
   { label: "الرئيسية", href: "/" },
@@ -12,8 +13,8 @@ const navLinks = [
 
 /**
  * Marketing Header — Server Component.
- * Fixed/sticky header with transparent default background,
- * wrapping the outer <header> tag with HeaderScrollWrapper for client scroll behavior.
+ * Fixed/sticky header with theme-aware navigation, theme toggle button (Light/Dark mode),
+ * and client scroll wrapper.
  */
 export function Header() {
   return (
@@ -25,7 +26,7 @@ export function Header() {
           className="flex items-center gap-2 shrink-0 group"
           aria-label="Zikora — الصفحة الرئيسية"
         >
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-orange-500 shadow-glow-orange transition-transform duration-200 group-hover:scale-105">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent-500 shadow-glow-accent transition-transform duration-200 group-hover:scale-105">
             <span className="text-white text-base font-bold select-none font-latin">Z</span>
           </div>
           <span className="text-xl font-bold tracking-tight text-ink font-latin">
@@ -39,15 +40,16 @@ export function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-ink transition-colors duration-150 hover:text-orange-500"
+              className="text-sm font-medium text-ink transition-colors duration-150 hover:text-accent-500"
             >
               {link.label}
             </Link>
           ))}
         </nav>
 
-        {/* Desktop Auth Action Buttons */}
+        {/* Desktop Actions & Theme Toggle */}
         <div className="hidden md:flex items-center gap-3">
+          <ThemeToggle />
           <Link href="/auth/login">
             <Button variant="ghost" size="sm">
               تسجيل الدخول
@@ -61,7 +63,8 @@ export function Header() {
         </div>
 
         {/* Mobile Menu Trigger & Panel */}
-        <div className="md:hidden">
+        <div className="flex items-center gap-2 md:hidden">
+          <ThemeToggle />
           <MobileMenuButton navLinks={navLinks} />
         </div>
       </div>

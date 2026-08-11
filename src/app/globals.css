@@ -3,98 +3,71 @@
 @import "tailwindcss";
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   ZIKORA DESIGN SYSTEM — globals.css
-   High-converting, vibrant design system for Zikora E-Learning Platform.
-   ───────────────────────────────────────────────────────────────────────────
-   Architecture:
-   1. CSS custom properties in :root — source of truth for all values
-   2. @theme inline — maps CSS vars → Tailwind v4 utility classes
-   3. Base reset & global styles
-   4. Custom utility classes (.bg-brand-gradient, .glass, etc.)
+   ZIKORA DUAL THEME DESIGN SYSTEM — globals.css
+   - Light Mode (Default): Techsara reference (#5B4FE0 accent, #14162B ink)
+   - Dark Mode: Official Zikora Thumbnail skill palette (#0A0A0A base, #7C3AED accent)
    ═══════════════════════════════════════════════════════════════════════════ */
 
-/* ─── 1. CSS Custom Properties (Design Tokens) ───────────────────────────── */
-:root {
-  /* ── Brand Orange Tonal Scale — Vibrant Electric Scale ───────────────── */
-  --orange-50:  #FFF5EF;
-  --orange-100: #FFE4D6;
-  --orange-200: #FFC4AB;
-  --orange-300: #FF9875;
-  --orange-400: #FF7042;
-  --orange-500: #FF5500;  /* ★ PRIMARY ELECTRIC BRAND ORANGE */
-  --orange-600: #E04400;  /* Rich vibrant hover */
-  --orange-700: #B83300;
-  --orange-800: #8F2500;
-  --orange-900: #5C1500;
+/* ─── 1. Light Mode Tokens (Default) ─────────────────────────────────────── */
+:root,
+[data-theme="light"] {
+  --bg-base:        #FFFFFF;
+  --bg-surface:     #F7F7FC;
+  --bg-surface-2:   #EFEFF8;
+  --accent-500:     #5B4FE0;
+  --accent-hover:   #4C3FD0;
+  --accent-blob:    #C7CDFF;
+  --accent-text:    #5B4FE0;
+  --danger-cta:     #EF4444;
+  --ink:            #14162B;
+  --text-secondary: #5B5D77;
+  --border-theme:   #E5E5F0;
+  --gradient-brand: linear-gradient(135deg, #4C6FFF 0%, #5B4FE0 45%, #7B5CF0 100%);
 
-  /* ── Premium Brand Gradient — Vibrant, Zero Muddy Brown ──────────────── */
-  --gradient-brand: linear-gradient(135deg, #FF6B00 0%, #E03E00 100%);
-  --gradient-brand-subtle: linear-gradient(135deg, #FFF5EF 0%, #FFEBE0 100%);
-  --gradient-dark: linear-gradient(135deg, #1C1917 0%, #0C0A09 100%);
+  --shadow-sm: 0 1px 2px rgba(20, 22, 43, 0.04);
+  --shadow-md: 0 4px 12px rgba(20, 22, 43, 0.06);
+  --shadow-lg: 0 12px 32px rgba(20, 22, 43, 0.10);
+  --shadow-glow: 0 4px 20px rgba(91, 79, 224, 0.35);
 
-  /* ── Core Brand Values ────────────────────────────────────────────────── */
-  --ink:        #121316;  /* Rich, crisp dark background & primary text */
-  --base-white: #FFFFFF;  /* Card & component background */
-  --page-bg:   #FAF8F5;  /* Warm, rich page background — eliminates flat white look */
-
-  /* ── Neutral Scale ────────────────────────────────────────────────────── */
-  --neutral-50:  #FAFAFA;
-  --neutral-100: #F4F4F5;
-  --neutral-200: #E4E4E7;
-  --neutral-300: #D4D4D8;
-  --neutral-400: #A1A1AA;
-  --neutral-500: #71717A;
-  --neutral-600: #52525B;
-  --neutral-700: #3F3F46;
-  --neutral-800: #27272A;
-  --neutral-900: #121316;
-
-  /* ── Semantic Colors ──────────────────────────────────────────────────── */
-  --success: #10B981;
-  --danger:  #EF4444;
-  --warning: #F59E0B;
-
-  /* ── Typography ───────────────────────────────────────────────────────── */
-  --font-arabic: var(--font-cairo, "Cairo", system-ui, sans-serif);
-  --font-latin:  var(--font-inter, "Inter", system-ui, sans-serif);
-
-  /* ── Shadows & Elevation ─────────────────────────────────────────────── */
-  --shadow-sm: 0 1px 3px rgba(18, 19, 22, 0.05), 0 1px 2px rgba(18, 19, 22, 0.03);
-  --shadow-md: 0 4px 16px rgba(18, 19, 22, 0.08), 0 2px 4px rgba(18, 19, 22, 0.04);
-  --shadow-lg: 0 12px 36px rgba(18, 19, 22, 0.12), 0 4px 8px rgba(18, 19, 22, 0.06);
-  --shadow-glow: 0 4px 20px rgba(255, 85, 0, 0.35);
+  --font-arabic: "Cairo", system-ui, sans-serif;
+  --font-latin:  "Inter", system-ui, sans-serif;
 }
 
-/* ─── 2. Tailwind v4 @theme ─────────────────────────────────────────────── */
+/* ─── 2. Dark Mode Tokens (Brand Palette) ───────────────────────────────── */
+[data-theme="dark"] {
+  --bg-base:        #0A0A0A;
+  --bg-surface:     #111111;
+  --bg-surface-2:   #1A1A1A;
+  --accent-500:     #7C3AED;
+  --accent-hover:   #6D28D9;
+  --accent-blob:    rgba(155, 48, 255, 0.15);
+  --accent-text:    #A855F7;
+  --danger-cta:     #CC1010;
+  --ink:            #F0F0F0;
+  --text-secondary: #CCCCCC;
+  --border-theme:   rgba(255, 255, 255, 0.08);
+  --gradient-brand: linear-gradient(135deg, #6B21D4 0%, #7C3AED 50%, #9B30FF 100%);
+
+  /* Dark mode elevation uses lightness & borders instead of shadows */
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: none;
+  --shadow-glow: 0 0 24px rgba(155, 48, 255, 0.25);
+}
+
+/* ─── 3. Tailwind v4 @theme inline Mapping ──────────────────────────────── */
 @theme inline {
-  --color-orange-50:  var(--orange-50);
-  --color-orange-100: var(--orange-100);
-  --color-orange-200: var(--orange-200);
-  --color-orange-300: var(--orange-300);
-  --color-orange-400: var(--orange-400);
-  --color-orange-500: var(--orange-500);
-  --color-orange-600: var(--orange-600);
-  --color-orange-700: var(--orange-700);
-  --color-orange-800: var(--orange-800);
-  --color-orange-900: var(--orange-900);
-
-  --color-ink:        var(--ink);
-  --color-base-white: var(--base-white);
-
-  --color-neutral-50:  var(--neutral-50);
-  --color-neutral-100: var(--neutral-100);
-  --color-neutral-200: var(--neutral-200);
-  --color-neutral-300: var(--neutral-300);
-  --color-neutral-400: var(--neutral-400);
-  --color-neutral-500: var(--neutral-500);
-  --color-neutral-600: var(--neutral-600);
-  --color-neutral-700: var(--neutral-700);
-  --color-neutral-800: var(--neutral-800);
-  --color-neutral-900: var(--neutral-900);
-
-  --color-success: var(--success);
-  --color-danger:  var(--danger);
-  --color-warning: var(--warning);
+  --color-bg-base:        var(--bg-base);
+  --color-bg-surface:     var(--bg-surface);
+  --color-bg-surface-2:   var(--bg-surface-2);
+  --color-accent-500:     var(--accent-500);
+  --color-accent-hover:   var(--accent-hover);
+  --color-accent-blob:    var(--accent-blob);
+  --color-accent-text:    var(--accent-text);
+  --color-danger-cta:     var(--danger-cta);
+  --color-ink:            var(--ink);
+  --color-text-secondary: var(--text-secondary);
+  --color-border-theme:   var(--border-theme);
 
   --font-arabic: var(--font-arabic);
   --font-latin:  var(--font-latin);
@@ -104,24 +77,28 @@
   --shadow-lg: var(--shadow-lg);
 }
 
-/* ─── 3. Custom Utility Classes ──────────────────────────────────────────── */
+/* ─── 4. Custom Utility Classes ──────────────────────────────────────────── */
 
 .bg-brand-gradient {
   background: var(--gradient-brand);
 }
 
-.shadow-glow-orange {
+.shadow-glow-accent {
   box-shadow: var(--shadow-glow);
 }
 
-/* Glassmorphism — fixed backdrop-filter order for CSS linter */
+/* Glassmorphic header background — correct backdrop-filter prefix ordering */
 .glass {
   background: rgba(255, 255, 255, 0.85);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
 }
 
-/* ─── 4. Base Reset & Global Styles ──────────────────────────────────────── */
+[data-theme="dark"] .glass {
+  background: rgba(10, 10, 10, 0.85);
+}
+
+/* ─── 5. Base Reset & Global Styles ──────────────────────────────────────── */
 
 *,
 *::before,
@@ -136,13 +113,14 @@ html {
 }
 
 body {
-  background-color: var(--page-bg);
+  background-color: var(--bg-base);
   color: var(--ink);
   font-family: var(--font-arabic);
   line-height: 1.6;
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -157,21 +135,21 @@ p {
 }
 
 a {
-  color: var(--orange-500);
+  color: var(--accent-500);
   text-decoration: none;
   transition: color 0.15s ease;
 }
 a:hover {
-  color: var(--orange-600);
+  color: var(--accent-hover);
 }
 
 :focus-visible {
-  outline: 2px solid var(--orange-500);
+  outline: 2px solid var(--accent-500);
   outline-offset: 2px;
   border-radius: 4px;
 }
 
 ::selection {
-  background-color: var(--orange-100);
-  color: var(--orange-900);
+  background-color: var(--accent-blob);
+  color: var(--ink);
 }

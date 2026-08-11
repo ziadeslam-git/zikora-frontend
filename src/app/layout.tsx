@@ -1,17 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-
-/**
- * Fonts: Cairo (Arabic) + Inter (Latin/Numbers)
- *
- * Loaded via CSS @import in globals.css instead of next/font/google.
- * Reason: The build/dev environment has no access to fonts.googleapis.com.
- * The fonts load correctly in the user's browser at runtime.
- *
- * When the environment has Google Fonts access, switch back to next/font/google:
- *   import { Cairo, Inter } from "next/font/google";
- *   const cairo = Cairo({ variable: "--font-cairo", subsets: ["arabic", "latin"], ... });
- */
+import { ThemeProvider } from "@/components/providers/ThemeProvider";
 
 export const metadata: Metadata = {
   title: {
@@ -37,8 +26,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ar" dir="rtl" className="h-full">
-      <body className="min-h-full flex flex-col antialiased">{children}</body>
+    <html lang="ar" dir="rtl" className="h-full" suppressHydrationWarning>
+      <body className="min-h-full flex flex-col antialiased bg-bg-base text-ink transition-colors duration-200">
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
     </html>
   );
 }

@@ -30,7 +30,7 @@ export function Hero() {
           {/* H1 Title */}
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-ink leading-[1.15] tracking-tight">
             ذاكر صح، وابقى{" "}
-            <span className="bg-brand-gradient bg-clip-text text-transparent underline decoration-accent-blob decoration-wavy underline-offset-8">
+            <span className="inline-block text-accent-500 font-black underline decoration-accent-500/40 decoration-wavy underline-offset-8">
               الأول
             </span>{" "}
             في ثانويتك
@@ -44,7 +44,7 @@ export function Hero() {
           {/* CTA Buttons Row */}
           <div className="flex flex-wrap items-center gap-4 pt-4 w-full sm:w-auto">
             <Link href="/auth/register" className="w-full sm:w-auto">
-              <Button variant="gradient" size="lg" className="w-full sm:w-auto text-base font-bold">
+              <Button variant="gradient" size="lg" className="w-full sm:w-auto text-base font-bold shadow-glow-accent">
                 <span>ابدأ التعلم الآن</span>
                 <ArrowLeft className="h-5 w-5 rtl:rotate-0 ltr:rotate-180" />
               </Button>
@@ -96,7 +96,7 @@ export function Hero() {
             {/* Central Graphic Area */}
             <div className="py-10 flex flex-col items-center text-center space-y-5">
               <div className="relative">
-                <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-brand-gradient shadow-glow-accent text-white">
+                <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-accent-500 shadow-glow-accent text-white">
                   <Laptop className="h-10 w-10" />
                 </div>
                 <div className="absolute -bottom-2 -right-2 bg-emerald-500 text-white rounded-full p-1 border-2 border-bg-surface">

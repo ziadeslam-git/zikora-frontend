@@ -10,7 +10,7 @@ export interface HeaderScrollWrapperProps {
 
 /**
  * HeaderScrollWrapper — Client Component wrapper for the Marketing Header.
- * Adds backdrop blur, background opacity, and theme border once window.scrollY > 80.
+ * Adds glassmorphism backdrop blur and translucent background.
  */
 export function HeaderScrollWrapper({
   children,
@@ -20,7 +20,7 @@ export function HeaderScrollWrapper({
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 80);
+      setIsScrolled(window.scrollY > 20);
     };
 
     handleScroll();
@@ -31,10 +31,10 @@ export function HeaderScrollWrapper({
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 w-full transition-all duration-300",
+        "sticky top-0 z-50 w-full transition-all duration-300 backdrop-blur-xl border-b",
         isScrolled
-          ? "bg-bg-base/95 backdrop-blur-md border-b border-border-theme shadow-sm"
-          : "bg-transparent",
+          ? "bg-bg-base/85 border-border-theme shadow-sm py-1"
+          : "bg-bg-base/70 border-border-theme/40 py-2",
         className,
       )}
     >

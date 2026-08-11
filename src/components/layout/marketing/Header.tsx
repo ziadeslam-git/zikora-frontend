@@ -1,67 +1,51 @@
 import Link from "next/link";
 import { HeaderScrollWrapper } from "./HeaderScrollWrapper";
+import { DesktopNav, navLinks } from "./DesktopNav";
 import { MobileMenuButton } from "./MobileMenuButton";
 import { ThemeToggle } from "@/components/layout/ThemeToggle";
 import { Button } from "@/components/ui/Button";
 
-const navLinks = [
-  { label: "الرئيسية", href: "/" },
-  { label: "الكورسات", href: "/courses" },
-  { label: "المعلمون", href: "/instructors" },
-  { label: "عن المنصة", href: "/about" },
-] as const;
-
 /**
  * Marketing Header — Server Component.
- * Dual-theme header using theme tokens exclusively.
+ * Glassmorphic navigation header featuring animated active route pill indicator.
  */
 export function Header() {
   return (
     <HeaderScrollWrapper>
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-18 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
         {/* Logo */}
         <Link
           href="/"
-          className="flex items-center gap-2 shrink-0 group"
+          className="flex items-center gap-2.5 shrink-0 group"
           aria-label="Zikora — الصفحة الرئيسية"
         >
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent-500 shadow-glow-accent transition-transform duration-200 group-hover:scale-105">
-            <span className="text-white text-base font-bold select-none font-latin">Z</span>
+          <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-accent-500 shadow-glow-accent transition-transform duration-200 group-hover:scale-105">
+            <span className="text-white text-lg font-extrabold select-none font-latin">Z</span>
           </div>
-          <span className="text-xl font-bold tracking-tight text-ink font-latin">
+          <span className="text-xl font-extrabold tracking-tight text-ink font-latin">
             Zikora
           </span>
         </Link>
 
-        {/* Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center gap-8" aria-label="القائمة الرئيسية">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-sm font-medium text-ink transition-colors duration-150 hover:text-accent-500"
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
+        {/* Animated Desktop Navigation Links */}
+        <DesktopNav />
 
         {/* Desktop Actions & Theme Toggle */}
         <div className="hidden md:flex items-center gap-3">
           <ThemeToggle />
           <Link href="/auth/login">
-            <Button variant="ghost" size="sm">
+            <Button variant="ghost" size="sm" className="font-bold text-xs">
               تسجيل الدخول
             </Button>
           </Link>
           <Link href="/auth/register">
-            <Button variant="primary" size="sm">
+            <Button variant="gradient" size="sm" className="font-bold text-xs shadow-glow-accent">
               ابدأ الآن
             </Button>
           </Link>
         </div>
 
-        {/* Mobile Menu Trigger & Panel (ThemeToggle stays visible on mobile) */}
+        {/* Mobile Menu Trigger & Panel */}
         <div className="flex items-center gap-2 md:hidden">
           <ThemeToggle />
           <MobileMenuButton navLinks={navLinks} />

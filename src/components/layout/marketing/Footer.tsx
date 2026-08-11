@@ -7,7 +7,7 @@ const footerLinks = {
     links: [
       { label: "الكورسات", href: "/courses" },
       { label: "المعلمون", href: "/instructors" },
-      { label: "الأسعار", href: "/pricing" },
+      { label: "الأسعار والعروض", href: "/pricing" },
       { label: "الأسئلة الشائعة", href: "/faq" },
     ],
   },
@@ -36,30 +36,30 @@ const socialLinks = [
 
 /**
  * Marketing Footer — Server Component.
- * Dark section by design in both themes using bg-ink (#14162B in Light, #0A0A0A in Dark)
- * and text-white/70 text.
+ * Fixed rich dark background (#0A0B1A) in both themes with crisp white typography
+ * and glowing social links.
  */
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="mt-auto border-t border-white/10 bg-ink text-white/70">
-      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+    <footer className="mt-auto border-t border-white/10 bg-[#0A0B1A] text-white/80">
+      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 text-start">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
           {/* Column 1: Logo + Short description + Social Icons */}
           <div className="space-y-4">
             <Link href="/" className="inline-flex items-center gap-2" aria-label="Zikora">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent-500 text-white font-bold font-latin">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent-500 text-white font-bold font-latin shadow-glow-accent">
                 Z
               </div>
-              <span className="text-xl font-bold tracking-tight text-white font-latin">
+              <span className="text-xl font-extrabold tracking-tight text-white font-latin">
                 Zikora
               </span>
             </Link>
 
             <p className="text-sm text-white/70 leading-relaxed">
               منصة Zikora للتعليم الإلكتروني — نوفر كورسات احترافية عالية الجودة
-              بأسعار مناسبة لكل المتعلمين في الوطن العربي.
+              بأسعار مناسبة لكل المتعلمين في مصر والوطن العربي.
             </p>
 
             <div className="flex items-center gap-3 pt-2">
@@ -70,7 +70,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/5 text-white/70 hover:bg-accent-500 hover:text-white transition-all duration-150"
+                  className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/10 text-white/80 hover:bg-accent-500 hover:text-white transition-all duration-150 border border-white/10"
                 >
                   <Icon className="h-4 w-4" aria-hidden="true" />
                 </a>
@@ -80,11 +80,11 @@ export function Footer() {
 
           {/* Column 2: المنصة */}
           <div className="space-y-4">
-            <h3 className="text-sm font-semibold text-white">{footerLinks.platform.title}</h3>
+            <h3 className="text-sm font-bold text-white">{footerLinks.platform.title}</h3>
             <ul className="space-y-2.5 text-sm">
               {footerLinks.platform.links.map(({ label, href }) => (
                 <li key={href}>
-                  <Link href={href} className="hover:text-accent-500 transition-colors">
+                  <Link href={href} className="text-white/70 hover:text-accent-500 transition-colors">
                     {label}
                   </Link>
                 </li>
@@ -94,11 +94,11 @@ export function Footer() {
 
           {/* Column 3: الدعم */}
           <div className="space-y-4">
-            <h3 className="text-sm font-semibold text-white">{footerLinks.support.title}</h3>
+            <h3 className="text-sm font-bold text-white">{footerLinks.support.title}</h3>
             <ul className="space-y-2.5 text-sm">
               {footerLinks.support.links.map(({ label, href }) => (
                 <li key={href}>
-                  <Link href={href} className="hover:text-accent-500 transition-colors">
+                  <Link href={href} className="text-white/70 hover:text-accent-500 transition-colors">
                     {label}
                   </Link>
                 </li>
@@ -108,7 +108,7 @@ export function Footer() {
 
           {/* Column 4: تواصل معنا */}
           <div className="space-y-4">
-            <h3 className="text-sm font-semibold text-white">تواصل معنا</h3>
+            <h3 className="text-sm font-bold text-white">تواصل معنا</h3>
             <ul className="space-y-3 text-sm">
               {contactInfo.map(({ label, href, Icon, name }) => (
                 <li key={name}>
@@ -116,7 +116,7 @@ export function Footer() {
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 hover:text-accent-500 transition-colors"
+                    className="flex items-center gap-2 text-white/70 hover:text-accent-500 transition-colors"
                   >
                     <Icon className="h-4 w-4 text-accent-500 shrink-0" aria-hidden="true" />
                     <span dir="ltr" className="font-latin">{label}</span>

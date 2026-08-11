@@ -39,7 +39,7 @@ export function LockedState({ lockReason = "not_enrolled" }: LockedStateProps) {
             <span>خاصية القفل التسلسلي مفعلة</span>
           </div>
         ) : (
-          <Link href="/courses">
+          <Link href="/checkout?plan=term">
             <Button variant="gradient" size="md" className="font-bold shadow-glow-accent">
               اشترك في الكورس الآن
             </Button>

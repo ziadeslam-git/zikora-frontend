@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Video, FileText, Clock, Award, ShieldCheck, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
@@ -39,10 +40,12 @@ export function CourseSidebarCard({
         </div>
       </div>
 
-      {/* Main CTA Button */}
-      <Button variant="gradient" size="lg" className="w-full font-bold shadow-glow-accent">
-        اشترك دلوقتي
-      </Button>
+      {/* Main CTA Button linking to Checkout */}
+      <Link href="/checkout?plan=term" className="w-full inline-block">
+        <Button variant="gradient" size="lg" className="w-full font-bold shadow-glow-accent">
+          اشترك في الكورس الآن 🚀
+        </Button>
+      </Link>
 
       {/* Course Features List */}
       <div className="space-y-3.5 pt-2">

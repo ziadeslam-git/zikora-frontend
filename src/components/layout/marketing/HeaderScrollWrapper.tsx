@@ -9,8 +9,8 @@ export interface HeaderScrollWrapperProps {
 }
 
 /**
- * HeaderScrollWrapper — Client Component wrapper for the Marketing Header.
- * Adds glassmorphism backdrop blur and translucent background.
+ * HeaderScrollWrapper — Floating Top Island Navigation Wrapper.
+ * Floating rounded capsule layout without full-width rectangular background blocks.
  */
 export function HeaderScrollWrapper({
   children,
@@ -20,7 +20,7 @@ export function HeaderScrollWrapper({
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 30);
     };
 
     handleScroll();
@@ -31,14 +31,20 @@ export function HeaderScrollWrapper({
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 w-full transition-all duration-300 backdrop-blur-xl border-b",
-        isScrolled
-          ? "bg-bg-base/85 border-border-theme shadow-sm py-1"
-          : "bg-bg-base/70 border-border-theme/40 py-2",
+        "fixed top-4 inset-x-0 z-50 px-4 sm:px-6 lg:px-8 transition-all duration-300 pointer-events-none",
         className,
       )}
     >
-      {children}
+      <div
+        className={cn(
+          "max-w-6xl mx-auto rounded-full transition-all duration-300 pointer-events-auto backdrop-blur-2xl border px-4 sm:px-6 py-2.5 flex items-center justify-between shadow-lg",
+          isScrolled
+            ? "bg-bg-base/90 border-border-theme shadow-xl py-2"
+            : "bg-bg-base/75 border-border-theme/60 shadow-md",
+        )}
+      >
+        {children}
+      </div>
     </header>
   );
 }

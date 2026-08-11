@@ -9,6 +9,7 @@ import {
   Testimonials,
   FinalCtaBanner,
 } from "@/components/marketing";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
 export const metadata: Metadata = {
   title: "الرئيسية — ذاكر صح وابقى الأول في ثانويتك",
@@ -18,45 +19,50 @@ export const metadata: Metadata = {
 
 /**
  * Marketing Homepage — Server Component.
- * Assembles all 8 homepage sections in exact sequence:
- * 1. Hero
- * 2. TrustBar
- * 3. ProcessTimeline
- * 4. WhyZikora (Bento Grid)
- * 5. FeaturedCourses
- * 6. BigStatement (Dark section with single giant faint 0% numeral)
- * 7. Testimonials
- * 8. FinalCtaBanner
- *
- * Header and Footer are automatically provided by (marketing)/layout.tsx.
- * Dual-Theme Aware: Light mode (Techsara reference) by default, Dark mode via theme switch.
+ * Assembles all 8 homepage sections wrapped with ScrollReveal directional animations.
  */
 export default function HomePage() {
   return (
-    <div className="flex flex-col min-h-screen overflow-x-hidden bg-bg-base text-ink transition-colors duration-200">
+    <div className="flex flex-col min-h-screen overflow-x-hidden bg-bg-base text-ink transition-colors duration-200 space-y-4">
       {/* 1. Hero Section */}
-      <Hero />
+      <ScrollReveal direction="up" delay={0.1}>
+        <Hero />
+      </ScrollReveal>
 
       {/* 2. Trust Bar */}
-      <TrustBar />
+      <ScrollReveal direction="up" delay={0.15}>
+        <TrustBar />
+      </ScrollReveal>
 
       {/* 3. Our Process — Step-by-step Timeline */}
-      <ProcessTimeline />
+      <ScrollReveal direction="right" delay={0.1}>
+        <ProcessTimeline />
+      </ScrollReveal>
 
       {/* 4. Why Zikora — Bento Grid */}
-      <WhyZikora />
+      <ScrollReveal direction="left" delay={0.1}>
+        <WhyZikora />
+      </ScrollReveal>
 
       {/* 5. Featured Courses */}
-      <FeaturedCourses />
+      <ScrollReveal direction="up" delay={0.1}>
+        <FeaturedCourses />
+      </ScrollReveal>
 
       {/* 6. Big Statement Section */}
-      <BigStatement />
+      <ScrollReveal direction="up" delay={0.1}>
+        <BigStatement />
+      </ScrollReveal>
 
       {/* 7. Student & Parent Testimonials */}
-      <Testimonials />
+      <ScrollReveal direction="right" delay={0.1}>
+        <Testimonials />
+      </ScrollReveal>
 
       {/* 8. Final Call to Action Banner */}
-      <FinalCtaBanner />
+      <ScrollReveal direction="up" delay={0.1}>
+        <FinalCtaBanner />
+      </ScrollReveal>
     </div>
   );
 }

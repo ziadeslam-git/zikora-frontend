@@ -8,6 +8,7 @@ import { FilterBar } from "@/components/courses/FilterBar";
 import { CourseGridSkeleton } from "@/components/courses/CourseGridSkeleton";
 import { Pagination } from "@/components/courses/Pagination";
 import { Button } from "@/components/ui/Button";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
 export const metadata: Metadata = {
   title: "كل الكورسات — Zikora",
@@ -122,54 +123,6 @@ const allCoursesData: (CourseCardProps & { grade: string; rawPrice: number })[] 
     badgeTag: "افتح الآن",
     grade: "2nd-sec",
   },
-  {
-    id: "physics-1st-sec",
-    subjectLabel: "الفيزياء",
-    teacherName: "أ. محمود رجب",
-    title: "أساسيات الفيزياء والقياس الفيزيائي للصف الأول الثانوي",
-    price: 250,
-    rawPrice: 250,
-    rating: 4.6,
-    lessonsCount: 12,
-    badgeTag: "افتح الآن",
-    grade: "1st-sec",
-  },
-  {
-    id: "chemistry-1st-sec",
-    subjectLabel: "الكيمياء",
-    teacherName: "أ. مصطفى الشريف",
-    title: "الكيمياء مركز العلوم والمول والمعادلة الكيميائية",
-    price: 0,
-    rawPrice: 0,
-    rating: 4.9,
-    lessonsCount: 10,
-    badgeTag: "مجاني 🎁",
-    grade: "1st-sec",
-  },
-  {
-    id: "math-algebra-2nd",
-    subjectLabel: "الرياضيات",
-    teacherName: "أ. خالد صبري",
-    title: "الجبر والجبر الخطى والتفاضل للصف الثاني الثانوي",
-    price: 280,
-    rawPrice: 280,
-    rating: 4.8,
-    lessonsCount: 16,
-    badgeTag: "افتح الآن",
-    grade: "2nd-sec",
-  },
-  {
-    id: "french-3rd-sec",
-    subjectLabel: "اللغة الفرنسية",
-    teacherName: "مسيو أحمد فريد",
-    title: "كورس اللغة الفرنسية الشامل وقواعد الثانوية العامة",
-    price: 290,
-    rawPrice: 290,
-    rating: 4.8,
-    lessonsCount: 15,
-    badgeTag: "افتح الآن",
-    grade: "3rd-sec",
-  },
 ];
 
 export default async function CoursesPage({ searchParams }: SearchParamsProps) {
@@ -184,7 +137,6 @@ export default async function CoursesPage({ searchParams }: SearchParamsProps) {
 
   // Filter Logic
   let filtered = allCoursesData.filter((course) => {
-    // Search query filter
     if (
       query &&
       !course.title.toLowerCase().includes(query) &&
@@ -194,7 +146,6 @@ export default async function CoursesPage({ searchParams }: SearchParamsProps) {
       return false;
     }
 
-    // Subject filter
     if (subjectFilter) {
       const subjectMap: Record<string, string> = {
         physics: "الفيزياء",
@@ -212,12 +163,10 @@ export default async function CoursesPage({ searchParams }: SearchParamsProps) {
       }
     }
 
-    // Grade filter
     if (gradeFilter && course.grade !== gradeFilter) {
       return false;
     }
 
-    // Price filter
     if (priceFilter) {
       if (priceFilter === "free" && course.rawPrice !== 0) return false;
       if (priceFilter === "under-300" && course.rawPrice >= 300) return false;
@@ -246,36 +195,42 @@ export default async function CoursesPage({ searchParams }: SearchParamsProps) {
   );
 
   return (
-    <div className="min-h-screen bg-bg-base text-ink py-12 px-6 lg:px-8 max-w-[1280px] mx-auto">
+    <div className="min-h-screen bg-bg-base text-ink py-16 px-6 lg:px-8 max-w-[1280px] mx-auto space-y-8">
       {/* 1. Page Header */}
-      <div className="text-center space-y-4 mb-10">
-        <span className="inline-block rounded-full bg-accent-blob/40 px-3.5 py-1 text-xs font-semibold text-accent-text">
-          تصفّح المكتبة التعليمية
-        </span>
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-ink tracking-tight">
-          كل الكورسات المتاحة
-        </h1>
-        <p className="text-text-secondary text-base max-w-xl mx-auto">
-          اختر مادتك من بين أفضل كورسات الثانوية العامة المعتمدة لحجز مكانك وتأمين تفوقك
-        </p>
+      <ScrollReveal direction="up" delay={0.1}>
+        <div className="text-center space-y-4 mb-6">
+          <span className="inline-block rounded-full bg-accent-blob/40 px-3.5 py-1 text-xs font-semibold text-accent-text">
+            تصفّح المكتبة التعليمية
+          </span>
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-ink tracking-tight">
+            كل الكورسات المتاحة
+          </h1>
+          <p className="text-text-secondary text-base max-w-xl mx-auto">
+            اختر مادتك من بين أفضل كورسات الثانوية العامة المعتمدة لحجز مكانك وتأمين تفوقك
+          </p>
 
-        <div className="pt-2">
-          <CourseSearchInput />
+          <div className="pt-2">
+            <CourseSearchInput />
+          </div>
         </div>
-      </div>
+      </ScrollReveal>
 
       {/* 2. Filter Bar */}
-      <FilterBar totalResults={filtered.length} />
+      <ScrollReveal direction="up" delay={0.15}>
+        <FilterBar totalResults={filtered.length} />
+      </ScrollReveal>
 
-      {/* 3. Results Grid wrapped in Suspense */}
+      {/* 3. Results Grid wrapped in Suspense & ScrollReveal */}
       <Suspense fallback={<CourseGridSkeleton />}>
         {filtered.length > 0 ? (
           <>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {paginatedCourses.map((course) => (
-                <CourseCard key={course.id} {...course} />
-              ))}
-            </div>
+            <ScrollReveal direction="up" delay={0.2}>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {paginatedCourses.map((course) => (
+                  <CourseCard key={course.id} {...course} />
+                ))}
+              </div>
+            </ScrollReveal>
 
             {/* 4. Pagination */}
             <Pagination

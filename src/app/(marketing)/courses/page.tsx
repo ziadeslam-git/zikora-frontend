@@ -1,0 +1,312 @@
+import { Suspense } from "react";
+import type { Metadata } from "next";
+import Link from "next/link";
+import { SearchX, RotateCcw } from "lucide-react";
+import { CourseCard, type CourseCardProps } from "@/components/marketing/CourseCard";
+import { CourseSearchInput } from "@/components/courses/CourseSearchInput";
+import { FilterBar } from "@/components/courses/FilterBar";
+import { CourseGridSkeleton } from "@/components/courses/CourseGridSkeleton";
+import { Pagination } from "@/components/courses/Pagination";
+import { Button } from "@/components/ui/Button";
+
+export const metadata: Metadata = {
+  title: "كل الكورسات — Zikora",
+  description: "تصفّح وفلتر كل كورسات الثانوية العامة المتاحة على منصة Zikora",
+};
+
+interface SearchParamsProps {
+  searchParams: Promise<{
+    q?: string;
+    subject?: string;
+    grade?: string;
+    price?: string;
+    sort?: string;
+    page?: string;
+  }>;
+}
+
+const allCoursesData: (CourseCardProps & { grade: string; rawPrice: number })[] = [
+  {
+    id: "physics-3rd-sec",
+    subjectLabel: "الفيزياء",
+    teacherName: "أ. محمد عبدالمعبود",
+    title: "كورس الفيزياء الكلاسيكية والكهربية للثانوية العامة",
+    price: 450,
+    rawPrice: 450,
+    rating: 4.9,
+    lessonsCount: 24,
+    badgeTag: "افتح الآن",
+    grade: "3rd-sec",
+  },
+  {
+    id: "chemistry-organic",
+    subjectLabel: "الكيمياء",
+    teacherName: "أ. سامح إبراهيم",
+    title: "الكيمياء العضوية والتحليلية بالكامل مع بنك الأسئلة",
+    price: 400,
+    rawPrice: 400,
+    rating: 4.8,
+    lessonsCount: 20,
+    badgeTag: "افتح الآن",
+    grade: "3rd-sec",
+  },
+  {
+    id: "math-calculus",
+    subjectLabel: "الرياضيات",
+    teacherName: "د. أحمد سليمان",
+    title: "التفاضل والتكامل والتطبيقات للثانوية العامة",
+    price: 420,
+    rawPrice: 420,
+    rating: 4.9,
+    lessonsCount: 28,
+    badgeTag: "افتح الآن",
+    grade: "3rd-sec",
+  },
+  {
+    id: "biology-structure",
+    subjectLabel: "الأحياء",
+    teacherName: "أ. حسن متولي",
+    title: "الباب الأول والثاني: التركيب والوظيفة والتكاثر",
+    price: 380,
+    rawPrice: 380,
+    rating: 4.7,
+    lessonsCount: 18,
+    badgeTag: "افتح الآن",
+    grade: "3rd-sec",
+  },
+  {
+    id: "arabic-grammar",
+    subjectLabel: "اللغة العربية",
+    teacherName: "أ. رضا الفاروق",
+    title: "النحو والبلاغة الشاملة للثانوية العامة",
+    price: 350,
+    rawPrice: 350,
+    rating: 4.9,
+    lessonsCount: 30,
+    badgeTag: "افتح الآن",
+    grade: "3rd-sec",
+  },
+  {
+    id: "english-full",
+    subjectLabel: "اللغة الإنجليزية",
+    teacherName: "أ. شريف المصري",
+    title: "المنهج الكامل ومجلة القواعد والكلمات الشاملة",
+    price: 320,
+    rawPrice: 320,
+    rating: 4.8,
+    lessonsCount: 22,
+    badgeTag: "افتح الآن",
+    grade: "2nd-sec",
+  },
+  {
+    id: "geology-env",
+    subjectLabel: "الجيولوجيا",
+    teacherName: "أ. ماجد إمام",
+    title: "علوم البيئة والجيولوجيا الشاملة والقطاعات",
+    price: 360,
+    rawPrice: 360,
+    rating: 4.9,
+    lessonsCount: 16,
+    badgeTag: "افتح الآن",
+    grade: "3rd-sec",
+  },
+  {
+    id: "philosophy-logic",
+    subjectLabel: "الفلسفة",
+    teacherName: "أ. تامر صفوت",
+    title: "المنطق التطبيقي والفلسفة وقضايا العصر",
+    price: 300,
+    rawPrice: 300,
+    rating: 4.7,
+    lessonsCount: 14,
+    badgeTag: "افتح الآن",
+    grade: "2nd-sec",
+  },
+  {
+    id: "physics-1st-sec",
+    subjectLabel: "الفيزياء",
+    teacherName: "أ. محمود رجب",
+    title: "أساسيات الفيزياء والقياس الفيزيائي للصف الأول الثانوي",
+    price: 250,
+    rawPrice: 250,
+    rating: 4.6,
+    lessonsCount: 12,
+    badgeTag: "افتح الآن",
+    grade: "1st-sec",
+  },
+  {
+    id: "chemistry-1st-sec",
+    subjectLabel: "الكيمياء",
+    teacherName: "أ. مصطفى الشريف",
+    title: "الكيمياء مركز العلوم والمول والمعادلة الكيميائية",
+    price: 0,
+    rawPrice: 0,
+    rating: 4.9,
+    lessonsCount: 10,
+    badgeTag: "مجاني 🎁",
+    grade: "1st-sec",
+  },
+  {
+    id: "math-algebra-2nd",
+    subjectLabel: "الرياضيات",
+    teacherName: "أ. خالد صبري",
+    title: "الجبر والجبر الخطى والتفاضل للصف الثاني الثانوي",
+    price: 280,
+    rawPrice: 280,
+    rating: 4.8,
+    lessonsCount: 16,
+    badgeTag: "افتح الآن",
+    grade: "2nd-sec",
+  },
+  {
+    id: "french-3rd-sec",
+    subjectLabel: "اللغة الفرنسية",
+    teacherName: "مسيو أحمد فريد",
+    title: "كورس اللغة الفرنسية الشامل وقواعد الثانوية العامة",
+    price: 290,
+    rawPrice: 290,
+    rating: 4.8,
+    lessonsCount: 15,
+    badgeTag: "افتح الآن",
+    grade: "3rd-sec",
+  },
+];
+
+export default async function CoursesPage({ searchParams }: SearchParamsProps) {
+  const resolvedParams = await searchParams;
+
+  const query = resolvedParams.q?.toLowerCase().trim() ?? "";
+  const subjectFilter = resolvedParams.subject ?? "";
+  const gradeFilter = resolvedParams.grade ?? "";
+  const priceFilter = resolvedParams.price ?? "";
+  const sortOption = resolvedParams.sort ?? "latest";
+  const currentPage = Math.max(1, parseInt(resolvedParams.page ?? "1", 10));
+
+  // Filter Logic
+  let filtered = allCoursesData.filter((course) => {
+    // Search query filter
+    if (
+      query &&
+      !course.title.toLowerCase().includes(query) &&
+      !course.subjectLabel.toLowerCase().includes(query) &&
+      !course.teacherName.toLowerCase().includes(query)
+    ) {
+      return false;
+    }
+
+    // Subject filter
+    if (subjectFilter) {
+      const subjectMap: Record<string, string> = {
+        physics: "الفيزياء",
+        chemistry: "الكيمياء",
+        biology: "الأحياء",
+        math: "الرياضيات",
+        arabic: "اللغة العربية",
+        english: "اللغة الإنجليزية",
+        geology: "الجيولوجيا",
+        philosophy: "الفلسفة",
+      };
+      const expectedSubject = subjectMap[subjectFilter];
+      if (expectedSubject && course.subjectLabel !== expectedSubject) {
+        return false;
+      }
+    }
+
+    // Grade filter
+    if (gradeFilter && course.grade !== gradeFilter) {
+      return false;
+    }
+
+    // Price filter
+    if (priceFilter) {
+      if (priceFilter === "free" && course.rawPrice !== 0) return false;
+      if (priceFilter === "under-300" && course.rawPrice >= 300) return false;
+      if (priceFilter === "300-500" && (course.rawPrice < 300 || course.rawPrice > 500)) return false;
+      if (priceFilter === "over-500" && course.rawPrice <= 500) return false;
+    }
+
+    return true;
+  });
+
+  // Sort Logic
+  if (sortOption === "rating") {
+    filtered = [...filtered].sort((a, b) => b.rating - a.rating);
+  } else if (sortOption === "price-asc") {
+    filtered = [...filtered].sort((a, b) => a.rawPrice - b.rawPrice);
+  } else if (sortOption === "price-desc") {
+    filtered = [...filtered].sort((a, b) => b.rawPrice - a.rawPrice);
+  }
+
+  // Pagination Logic (8 items per page)
+  const pageSize = 8;
+  const totalPages = Math.ceil(filtered.length / pageSize);
+  const paginatedCourses = filtered.slice(
+    (currentPage - 1) * pageSize,
+    currentPage * pageSize,
+  );
+
+  return (
+    <div className="min-h-screen bg-bg-base text-ink py-12 px-6 lg:px-8 max-w-[1280px] mx-auto">
+      {/* 1. Page Header */}
+      <div className="text-center space-y-4 mb-10">
+        <span className="inline-block rounded-full bg-accent-blob/40 px-3.5 py-1 text-xs font-semibold text-accent-text">
+          تصفّح المكتبة التعليمية
+        </span>
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-ink tracking-tight">
+          كل الكورسات المتاحة
+        </h1>
+        <p className="text-text-secondary text-base max-w-xl mx-auto">
+          اختر مادتك من بين أفضل كورسات الثانوية العامة المعتمدة لحجز مكانك وتأمين تفوقك
+        </p>
+
+        <div className="pt-2">
+          <CourseSearchInput />
+        </div>
+      </div>
+
+      {/* 2. Filter Bar */}
+      <FilterBar totalResults={filtered.length} />
+
+      {/* 3. Results Grid wrapped in Suspense */}
+      <Suspense fallback={<CourseGridSkeleton />}>
+        {filtered.length > 0 ? (
+          <>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {paginatedCourses.map((course) => (
+                <CourseCard key={course.id} {...course} />
+              ))}
+            </div>
+
+            {/* 4. Pagination */}
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              searchParams={resolvedParams}
+            />
+          </>
+        ) : (
+          /* Empty State */
+          <div className="py-20 text-center flex flex-col items-center justify-center space-y-4 bg-bg-surface border border-border-theme rounded-3xl p-8 max-w-md mx-auto my-8">
+            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-accent-blob/40 text-accent-500">
+              <SearchX className="h-8 w-8" />
+            </div>
+            <div className="space-y-1">
+              <h3 className="text-xl font-bold text-ink">مفيش كورسات مطابقة</h3>
+              <p className="text-sm text-text-secondary">
+                جرّب تغيّر كلمات البحث أو تعدّل الفلاتر المختارة
+              </p>
+            </div>
+            <div className="pt-2">
+              <Link href="/courses">
+                <Button variant="outline" size="md" className="gap-2">
+                  <RotateCcw className="h-4 w-4" />
+                  <span>إعادة ضبط الفلاتر</span>
+                </Button>
+              </Link>
+            </div>
+          </div>
+        )}
+      </Suspense>
+    </div>
+  );
+}

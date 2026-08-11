@@ -11,6 +11,7 @@ const featuredCourses: CourseCardProps[] = [
     price: 450,
     rating: 4.9,
     lessonsCount: 24,
+    badgeTag: "افتح الآن",
   },
   {
     id: "chemistry-organic",
@@ -20,6 +21,7 @@ const featuredCourses: CourseCardProps[] = [
     price: 400,
     rating: 4.8,
     lessonsCount: 20,
+    badgeTag: "افتح الآن",
   },
   {
     id: "math-calculus",
@@ -29,6 +31,7 @@ const featuredCourses: CourseCardProps[] = [
     price: 420,
     rating: 4.9,
     lessonsCount: 28,
+    badgeTag: "افتح الآن",
   },
   {
     id: "biology-structure",
@@ -38,6 +41,7 @@ const featuredCourses: CourseCardProps[] = [
     price: 380,
     rating: 4.7,
     lessonsCount: 18,
+    badgeTag: "افتح الآن",
   },
   {
     id: "arabic-grammar",
@@ -47,6 +51,7 @@ const featuredCourses: CourseCardProps[] = [
     price: 350,
     rating: 4.9,
     lessonsCount: 30,
+    badgeTag: "افتح الآن",
   },
   {
     id: "english-full",
@@ -56,6 +61,7 @@ const featuredCourses: CourseCardProps[] = [
     price: 320,
     rating: 4.8,
     lessonsCount: 22,
+    badgeTag: "افتح الآن",
   },
   {
     id: "geology-env",
@@ -65,6 +71,7 @@ const featuredCourses: CourseCardProps[] = [
     price: 360,
     rating: 4.9,
     lessonsCount: 16,
+    badgeTag: "افتح الآن",
   },
   {
     id: "philosophy-logic",
@@ -74,20 +81,21 @@ const featuredCourses: CourseCardProps[] = [
     price: 300,
     rating: 4.7,
     lessonsCount: 14,
+    badgeTag: "افتح الآن",
   },
 ];
 
 /**
  * FeaturedCourses — Marketing Homepage Featured Courses Section (Server Component).
- * Displays a 4-column responsive grid of 8 top courses with header navigation.
+ * Displays a 4-column responsive grid of 8 top courses with theme-aware styling.
  */
 export function FeaturedCourses() {
   return (
     <section className="py-20 lg:py-28 max-w-[1280px] mx-auto px-6 lg:px-8">
       {/* Section Header Row */}
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
-        <div className="space-y-2">
-          <span className="inline-block rounded-full bg-orange-100 px-3.5 py-1 text-xs font-semibold text-orange-600">
+        <div className="space-y-2 text-start">
+          <span className="inline-block rounded-full bg-accent-blob/40 px-3.5 py-1 text-xs font-semibold text-accent-text">
             الكورسات المميزة
           </span>
           <h2 className="text-3xl lg:text-4xl font-bold text-ink">
@@ -97,7 +105,7 @@ export function FeaturedCourses() {
 
         <Link
           href="/courses"
-          className="inline-flex items-center gap-2 text-sm font-bold text-orange-600 hover:text-orange-700 transition-colors group self-start sm:self-auto"
+          className="inline-flex items-center gap-2 text-sm font-bold text-accent-500 hover:text-accent-hover transition-colors group self-start sm:self-auto"
         >
           <span>عرض كل الكورسات (+120)</span>
           <ArrowLeft className="h-4 w-4 transition-transform duration-200 group-hover:-translate-x-1 rtl:group-hover:-translate-x-1" />

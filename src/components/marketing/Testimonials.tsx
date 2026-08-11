@@ -41,20 +41,20 @@ const testimonials: TestimonialItem[] = [
 
 /**
  * Testimonials — Marketing Homepage Testimonials Section (Server Component).
- * Renders 3 customer/parent review cards with 5-star ratings and profile information.
+ * Dual-theme compliant: bg-bg-surface, border-border-theme, text-ink, text-text-secondary.
  */
 export function Testimonials() {
   return (
     <section className="py-20 lg:py-28 max-w-[1280px] mx-auto px-6 lg:px-8">
       {/* Section Header */}
       <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-        <span className="inline-block rounded-full bg-orange-100 px-3.5 py-1 text-xs font-semibold text-orange-600">
+        <span className="inline-block rounded-full bg-accent-blob/40 px-3.5 py-1 text-xs font-semibold text-accent-text">
           آراء وتجارب
         </span>
         <h2 className="text-3xl lg:text-4xl font-bold text-ink">
           ماذا يقول طلابنا وأولياء الأمور عن Zikora؟
         </h2>
-        <p className="text-neutral-600 text-base">
+        <p className="text-text-secondary text-base">
           تجارب حقيقية لطلاب وأسر حققوا نتائج ملموسة مع معلمينا
         </p>
       </div>
@@ -64,7 +64,7 @@ export function Testimonials() {
         {testimonials.map((item) => (
           <div
             key={item.id}
-            className="flex flex-col justify-between bg-neutral-50 rounded-2xl p-6 lg:p-8 border border-neutral-200/80 shadow-xs hover:shadow-md transition-shadow duration-200 relative"
+            className="flex flex-col justify-between bg-bg-surface rounded-2xl p-6 lg:p-8 border border-border-theme shadow-xs hover:shadow-md transition-all duration-200 relative text-start"
           >
             {/* Top Rating & Quote Icon */}
             <div className="space-y-4">
@@ -78,22 +78,22 @@ export function Testimonials() {
                     />
                   ))}
                 </div>
-                <Quote className="h-6 w-6 text-neutral-300" aria-hidden="true" />
+                <Quote className="h-6 w-6 text-text-secondary opacity-40" aria-hidden="true" />
               </div>
 
-              <p className="text-base text-neutral-700 leading-relaxed">
+              <p className="text-base text-ink leading-relaxed">
                 «{item.quote}»
               </p>
             </div>
 
             {/* Author Profile Footer */}
-            <div className="mt-8 pt-4 border-t border-neutral-200/60 flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-orange-500 text-white font-bold text-sm shrink-0 font-latin">
+            <div className="mt-8 pt-4 border-t border-border-theme flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-accent-500 text-white font-bold text-sm shrink-0 font-latin">
                 {item.avatarLetter}
               </div>
               <div className="space-y-0.5">
                 <p className="text-sm font-bold text-ink">{item.authorName}</p>
-                <p className="text-xs text-neutral-500">{item.authorRole}</p>
+                <p className="text-xs text-text-secondary">{item.authorRole}</p>
               </div>
             </div>
           </div>

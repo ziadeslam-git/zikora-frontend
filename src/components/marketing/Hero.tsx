@@ -3,14 +3,14 @@ import { ArrowLeft, BookOpen, Star, Laptop, Play, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/Button";
 
 /**
- * Hero — Re-engineered Marketing Homepage Hero Section (Server Component).
+ * Hero — Marketing Homepage Hero Section (Server Component).
  * Dual-Theme Aware: Adapts seamlessly to Light Mode (Techsara palette)
  * and Dark Mode (Official Zikora Brand Palette).
  */
 export function Hero() {
   return (
     <section className="relative overflow-x-clip pt-36 pb-20 lg:pt-44 lg:pb-28 px-6 lg:px-8 max-w-[1280px] mx-auto">
-      {/* Background Decorative Glow Blobs */}
+      {/* Background Decorative Glow Blob */}
       <div
         className="absolute top-12 start-1/2 -translate-x-1/2 -z-10 w-[700px] h-[500px] rounded-full bg-accent-blob blur-3xl opacity-50 pointer-events-none"
         aria-hidden="true"

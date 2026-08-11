@@ -35,20 +35,21 @@ const steps = [
 
 /**
  * ProcessTimeline — Marketing Homepage 4-step Timeline (Server Component).
- * Renders a vertical connected timeline showing the student journey in 4 steps.
+ * Dual-Theme Aware with bg-brand-gradient numbered circles, bg-bg-surface step cards,
+ * and vertical timeline indicator.
  */
 export function ProcessTimeline() {
   return (
     <section className="py-20 lg:py-28 max-w-[1280px] mx-auto px-6 lg:px-8">
       {/* Section Header */}
       <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-        <span className="inline-block rounded-full bg-orange-100 px-3.5 py-1 text-xs font-semibold text-orange-600">
+        <span className="inline-block rounded-full bg-accent-blob/40 px-3.5 py-1 text-xs font-semibold text-accent-text">
           كيف تعمل المنصة؟
         </span>
         <h2 className="text-3xl lg:text-4xl font-bold text-ink">
           رحلتك التعليمية في 4 خطوات بسيطة
         </h2>
-        <p className="text-neutral-600 text-base">
+        <p className="text-text-secondary text-base">
           خطوات واضحة وسريعة تبدأ بيها رحلة التفوق من أي مكان في مصر
         </p>
       </div>
@@ -63,25 +64,25 @@ export function ProcessTimeline() {
             <div key={step.number} className="relative flex gap-6 lg:gap-8 items-start">
               {/* Left timeline indicator column (RTL start) */}
               <div className="flex flex-col items-center shrink-0">
-                {/* Number Circle */}
-                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#FC5A05] to-[#491900] text-white font-bold text-lg flex items-center justify-center shadow-md font-latin shrink-0 z-10">
+                {/* Number Circle using brand-gradient */}
+                <div className="w-14 h-14 rounded-full bg-brand-gradient text-white font-bold text-lg flex items-center justify-center shadow-md font-latin shrink-0 z-10">
                   {step.number}
                 </div>
 
                 {/* Connecting Vertical Line */}
                 {!isLast && (
-                  <div className="w-0.5 bg-gradient-to-b from-orange-500 to-orange-200 h-24 my-2" />
+                  <div className="w-0.5 bg-gradient-to-b from-accent-500 to-accent-500/10 h-24 my-2" />
                 )}
               </div>
 
               {/* Step Card Content */}
-              <div className="flex-1 bg-white border border-neutral-200 rounded-2xl p-6 lg:p-8 flex flex-col sm:flex-row items-start sm:items-center gap-6 shadow-sm hover:shadow-md transition-shadow duration-200">
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-orange-100 text-orange-600 shrink-0">
+              <div className="flex-1 bg-bg-surface border border-border-theme rounded-2xl p-6 lg:p-8 flex flex-col sm:flex-row items-start sm:items-center gap-6 shadow-sm hover:shadow-md transition-all duration-200">
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-accent-blob/40 text-accent-500 shrink-0">
                   <Icon className="h-7 w-7" aria-hidden="true" />
                 </div>
-                <div className="space-y-1.5 flex-1">
+                <div className="space-y-1.5 flex-1 text-start">
                   <h3 className="text-xl font-bold text-ink">{step.title}</h3>
-                  <p className="text-base text-neutral-600 leading-relaxed">
+                  <p className="text-base text-text-secondary leading-relaxed">
                     {step.description}
                   </p>
                 </div>

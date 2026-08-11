@@ -6,10 +6,6 @@ export const metadata: Metadata = {
   description: "سجّل دخولك لمتابعة دروسك وامتحاناتك في منصة Zikora",
 };
 
-/**
- * Login Page — Server Component.
- * Rendered inside the (auth)/layout.tsx split-screen layout.
- */
 export default function LoginPage() {
   return <LoginForm />;
 }

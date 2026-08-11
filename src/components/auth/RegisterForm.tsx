@@ -60,7 +60,7 @@ export function RegisterForm() {
       await new Promise((resolve) => setTimeout(resolve, 800));
       console.log("Registration submitted:", data);
       // Redirect directly to Onboarding wizard
-      router.push("/onboarding");
+      router.push("/auth/onboarding");
     } catch {
       setIsSubmitting(false);
     }

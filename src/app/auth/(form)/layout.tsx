@@ -2,7 +2,7 @@ import Link from "next/link";
 import { BookOpen, Sparkles } from "lucide-react";
 import { ThemeToggle } from "@/components/layout/ThemeToggle";
 
-export default function AuthLayout({
+export default function AuthFormLayout({
   children,
 }: {
   children: React.ReactNode;

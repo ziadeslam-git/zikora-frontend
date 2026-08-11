@@ -6,10 +6,6 @@ export const metadata: Metadata = {
   description: "اختار صفك الدراسي وإعدادات المتابعة لتهيئة حسابك في منصة Zikora",
 };
 
-/**
- * Onboarding Page — Server Component.
- * Rendered inside the (auth)/onboarding/layout.tsx centered layout.
- */
 export default function OnboardingPage() {
   return <OnboardingWizard />;
 }

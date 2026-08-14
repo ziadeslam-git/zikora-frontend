@@ -4,12 +4,14 @@ import { Button } from "@/components/ui/Button";
 
 /**
  * BigStatement — Marketing Homepage Dark Statement Section (Server Component).
- * Fixed rich dark container (#0D0E1F) with 100% forced high-contrast white text on all children.
+ * Uses bg-bg-inverse token (always-dark surface, intentional by design in both themes).
+ * Note: previously used #0D0E1F (vs Footer's #0A0B1A — diff of ~3 shades).
+ * Consolidated to #0A0B1A (canonical bgInverse token) for single source of truth.
  */
 export function BigStatement() {
   return (
     <section className="mx-4 sm:mx-6 lg:mx-8 max-w-[1280px] lg:mx-auto my-16">
-      <div className="bg-[#0D0E1F] !text-white rounded-3xl p-8 sm:p-12 lg:p-16 relative overflow-hidden border border-white/15 shadow-2xl">
+      <div className="bg-bg-inverse !text-white rounded-3xl p-8 sm:p-12 lg:p-16 relative overflow-hidden border border-white/15 shadow-2xl">
         {/* Giant decorative background numeral */}
         <span
           className="text-[200px] sm:text-[300px] lg:text-[380px] font-black text-white/[0.05] absolute -start-10 top-1/2 -translate-y-1/2 leading-none select-none pointer-events-none font-latin z-0"

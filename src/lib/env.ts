@@ -1,24 +1,33 @@
 /**
- * Environment variable validation — runs at build time.
- * Throws a descriptive error immediately if a required variable is missing,
- * so we discover config issues in CI/CD rather than at runtime in production.
+ * Environment variable configuration.
+ *
+ * LOCAL DEV (no backend yet):
+ *   If NEXT_PUBLIC_API_BASE_URL is missing, we emit a console.warn and fall
+ *   back to a clearly-fake placeholder URL so the app can run without throwing.
+ *   All API calls will fail until a real URL is added to .env.local.
+ *
+ * CI / PRODUCTION:
+ *   Set NEXT_PUBLIC_API_BASE_URL to the real backend base URL. The warn is a
+ *   no-op since the value will be present.
  */
 
-const requiredEnvVars = ["NEXT_PUBLIC_API_BASE_URL"] as const;
+const API_BASE_URL_PLACEHOLDER = "http://localhost:0/api-not-configured";
 
-requiredEnvVars.forEach((key) => {
-  if (!process.env[key]) {
-    throw new Error(
-      `[env] Missing required environment variable: "${key}"\n` +
-        `Make sure it is defined in .env.local (for local dev) or your deployment environment.`,
-    );
-  }
-});
+const rawApiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+
+if (!rawApiBaseUrl) {
+  // eslint-disable-next-line no-console
+  console.warn(
+    "[env] NEXT_PUBLIC_API_BASE_URL is not set — using a placeholder. " +
+      "API calls will fail until a real backend URL is configured in .env.local.",
+  );
+}
 
 export const env = {
-  apiBaseUrl: process.env.NEXT_PUBLIC_API_BASE_URL!,
+  apiBaseUrl: rawApiBaseUrl ?? API_BASE_URL_PLACEHOLDER,
   appEnv: (process.env.NEXT_PUBLIC_APP_ENV ?? "development") as
     | "development"
     | "staging"
     | "production",
 } as const;
+

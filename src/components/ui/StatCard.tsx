@@ -32,6 +32,8 @@ export interface StatCardProps {
   value: string | number;
   /** Optional trend indicator — direction + percentage change */
   trend?: StatTrend;
+  /** Visual variant. Primary uses solid brand color. Default uses clean surface. */
+  variant?: "default" | "primary";
   /** Optional background override for the icon circle */
   iconBgClassName?: string;
   /** Optional icon color override */
@@ -44,65 +46,76 @@ export function StatCard({
   label,
   value,
   trend,
-  iconBgClassName = "bg-orange-100",
-  iconColorClassName = "text-orange-500",
+  variant = "default",
+  iconBgClassName,
+  iconColorClassName,
   className,
 }: StatCardProps) {
   const isTrendUp = trend?.direction === "up";
+  const isPrimary = variant === "primary";
+
+  // Default colors if not overridden
+  const finalIconBg = iconBgClassName || (isPrimary ? "bg-white/20" : "bg-orange-100");
+  const finalIconColor = iconColorClassName || (isPrimary ? "text-white" : "text-orange-500");
 
   return (
     <div
       className={cn(
-        "flex flex-col gap-4 rounded-2xl bg-base-white p-6 shadow-sm",
-        "border border-neutral-200 transition-shadow duration-200 hover:shadow-md",
+        "flex flex-col gap-6 rounded-[2rem] p-6 shadow-sm transition-shadow duration-200 hover:shadow-md",
+        isPrimary 
+          ? "bg-accent-500 text-white border-transparent" 
+          : "bg-bg-base border border-border-theme",
         className,
       )}
     >
-      {/* Icon circle */}
-      <div
-        className={cn(
-          "flex h-10 w-10 items-center justify-center rounded-full shrink-0",
-          iconBgClassName,
-        )}
-        aria-hidden="true"
-      >
-        <span className={cn("h-5 w-5", iconColorClassName)}>{icon}</span>
-      </div>
-
-      {/* Value + Label */}
-      <div className="space-y-1">
-        <p
-          className="text-3xl font-bold tracking-tight text-ink font-latin"
-          aria-label={`${label}: ${value}`}
+      <div className="flex justify-between items-start">
+        <div className="space-y-1">
+          <p className={cn("text-sm font-medium", isPrimary ? "text-white/90" : "text-text-secondary")}>
+            {label}
+          </p>
+          <p
+            className={cn("text-3xl font-extrabold tracking-tight font-latin", isPrimary ? "text-white" : "text-ink")}
+            aria-label={`${label}: ${value}`}
+          >
+            {typeof value === "number" ? value.toLocaleString("en-US") : value}
+          </p>
+        </div>
+        
+        {/* Icon circle */}
+        <div
+          className={cn(
+            "flex h-12 w-12 items-center justify-center rounded-2xl shrink-0",
+            finalIconBg,
+          )}
+          aria-hidden="true"
         >
-          {typeof value === "number" ? value.toLocaleString("ar-EG") : value}
-        </p>
-        <p className="text-sm text-neutral-600">{label}</p>
+          <span className={cn("h-6 w-6", finalIconColor)}>{icon}</span>
+        </div>
       </div>
 
       {/* Trend indicator */}
       {trend && (
-        <div className="flex items-center gap-1.5">
+        <div className="flex items-center gap-2 mt-auto">
           {isTrendUp ? (
             <TrendingUp
-              className="h-3.5 w-3.5 text-success shrink-0"
+              className={cn("h-4 w-4 shrink-0", isPrimary ? "text-white" : "text-success")}
               aria-hidden="true"
             />
           ) : (
             <TrendingDown
-              className="h-3.5 w-3.5 text-danger shrink-0"
+              className={cn("h-4 w-4 shrink-0", isPrimary ? "text-white" : "text-danger-cta")}
               aria-hidden="true"
             />
           )}
           <span
             className={cn(
-              "text-xs font-semibold font-latin",
-              isTrendUp ? "text-success" : "text-danger",
+              "text-sm font-bold font-latin",
+              isPrimary ? "text-white" : isTrendUp ? "text-success" : "text-danger-cta",
             )}
           >
             {trend.value}
           </span>
-          <span className="text-xs text-neutral-400">
+          <span className={cn("text-xs", isPrimary ? "text-white/80" : "text-text-secondary")}>
             {trend.label ?? "من الشهر اللي فات"}
           </span>
         </div>

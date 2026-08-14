@@ -10,6 +10,8 @@ export const designTokens = {
   light: {
     bgBase: "#FFFFFF",
     bgSurface: "#F7F7FC",
+    /** Always-dark inverse surface (Footer, BigStatement) — canonical value, same in both themes. */
+    bgInverse: "#0A0B1A",
     accent500: "#5B4FE0",
     accentBlob: "#C7CDFF",
     ink: "#14162B",
@@ -24,6 +26,8 @@ export const designTokens = {
     bgBase: "#0A0A0A",
     bgSurface: "#111111",
     bgSurface2: "#1A1A1A",
+    /** Always-dark inverse surface — canonical value, same in both themes. */
+    bgInverse: "#0A0B1A",
     accent500: "#7C3AED",
     accentGlow: "#9B30FF",
     accentText: "#A855F7",

@@ -14,6 +14,8 @@
   --bg-base:        #FFFFFF;
   --bg-surface:     #F7F7FC;
   --bg-surface-2:   #EFEFF8;
+  /* Intentionally always-dark surface (Footer, BigStatement) — same value in both themes */
+  --bg-inverse:     #0A0B1A;
   --accent-500:     #5B4FE0;
   --accent-hover:   #4C3FD0;
   --accent-blob:    #C7CDFF;
@@ -38,6 +40,8 @@
   --bg-base:        #0A0A0A;
   --bg-surface:     #111111;
   --bg-surface-2:   #1A1A1A;
+  /* bg-inverse intentionally stays the same dark value in both themes */
+  --bg-inverse:     #0A0B1A;
   --accent-500:     #7C3AED;
   --accent-hover:   #6D28D9;
   --accent-blob:    rgba(155, 48, 255, 0.15);
@@ -60,6 +64,7 @@
   --color-bg-base:        var(--bg-base);
   --color-bg-surface:     var(--bg-surface);
   --color-bg-surface-2:   var(--bg-surface-2);
+  --color-bg-inverse:     var(--bg-inverse);
   --color-accent-500:     var(--accent-500);
   --color-accent-hover:   var(--accent-hover);
   --color-accent-blob:    var(--accent-blob);

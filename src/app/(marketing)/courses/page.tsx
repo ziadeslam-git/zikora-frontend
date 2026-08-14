@@ -2,13 +2,14 @@ import { Suspense } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SearchX, RotateCcw } from "lucide-react";
-import { CourseCard, type CourseCardProps } from "@/components/marketing/CourseCard";
+import { CourseCard } from "@/components/marketing/CourseCard";
 import { CourseSearchInput } from "@/components/courses/CourseSearchInput";
 import { FilterBar } from "@/components/courses/FilterBar";
 import { CourseGridSkeleton } from "@/components/courses/CourseGridSkeleton";
 import { Pagination } from "@/components/courses/Pagination";
 import { Button } from "@/components/ui/Button";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
+import { allCourses } from "@/lib/data/courses";
 
 export const metadata: Metadata = {
   title: "كل الكورسات — Zikora",
@@ -26,104 +27,9 @@ interface SearchParamsProps {
   }>;
 }
 
-const allCoursesData: (CourseCardProps & { grade: string; rawPrice: number })[] = [
-  {
-    id: "physics-3rd-sec",
-    subjectLabel: "الفيزياء",
-    teacherName: "أ. محمد عبدالمعبود",
-    title: "كورس الفيزياء الكلاسيكية والكهربية للثانوية العامة",
-    price: 450,
-    rawPrice: 450,
-    rating: 4.9,
-    lessonsCount: 24,
-    badgeTag: "افتح الآن",
-    grade: "3rd-sec",
-  },
-  {
-    id: "chemistry-organic",
-    subjectLabel: "الكيمياء",
-    teacherName: "أ. سامح إبراهيم",
-    title: "الكيمياء العضوية والتحليلية بالكامل مع بنك الأسئلة",
-    price: 400,
-    rawPrice: 400,
-    rating: 4.8,
-    lessonsCount: 20,
-    badgeTag: "افتح الآن",
-    grade: "3rd-sec",
-  },
-  {
-    id: "math-calculus",
-    subjectLabel: "الرياضيات",
-    teacherName: "د. أحمد سليمان",
-    title: "التفاضل والتكامل والتطبيقات للثانوية العامة",
-    price: 420,
-    rawPrice: 420,
-    rating: 4.9,
-    lessonsCount: 28,
-    badgeTag: "افتح الآن",
-    grade: "3rd-sec",
-  },
-  {
-    id: "biology-structure",
-    subjectLabel: "الأحياء",
-    teacherName: "أ. حسن متولي",
-    title: "الباب الأول والثاني: التركيب والوظيفة والتكاثر",
-    price: 380,
-    rawPrice: 380,
-    rating: 4.7,
-    lessonsCount: 18,
-    badgeTag: "افتح الآن",
-    grade: "3rd-sec",
-  },
-  {
-    id: "arabic-grammar",
-    subjectLabel: "اللغة العربية",
-    teacherName: "أ. رضا الفاروق",
-    title: "النحو والبلاغة الشاملة للثانوية العامة",
-    price: 350,
-    rawPrice: 350,
-    rating: 4.9,
-    lessonsCount: 30,
-    badgeTag: "افتح الآن",
-    grade: "3rd-sec",
-  },
-  {
-    id: "english-full",
-    subjectLabel: "اللغة الإنجليزية",
-    teacherName: "أ. شريف المصري",
-    title: "المنهج الكامل ومجلة القواعد والكلمات الشاملة",
-    price: 320,
-    rawPrice: 320,
-    rating: 4.8,
-    lessonsCount: 22,
-    badgeTag: "افتح الآن",
-    grade: "2nd-sec",
-  },
-  {
-    id: "geology-env",
-    subjectLabel: "الجيولوجيا",
-    teacherName: "أ. ماجد إمام",
-    title: "علوم البيئة والجيولوجيا الشاملة والقطاعات",
-    price: 360,
-    rawPrice: 360,
-    rating: 4.9,
-    lessonsCount: 16,
-    badgeTag: "افتح الآن",
-    grade: "3rd-sec",
-  },
-  {
-    id: "philosophy-logic",
-    subjectLabel: "الفلسفة",
-    teacherName: "أ. تامر صفوت",
-    title: "المنطق التطبيقي والفلسفة وقضايا العصر",
-    price: 300,
-    rawPrice: 300,
-    rating: 4.7,
-    lessonsCount: 14,
-    badgeTag: "افتح الآن",
-    grade: "2nd-sec",
-  },
-];
+/** Alias for backward compatibility with filter/sort logic below. */
+const allCoursesData = allCourses;
+
 
 export default async function CoursesPage({ searchParams }: SearchParamsProps) {
   const resolvedParams = await searchParams;

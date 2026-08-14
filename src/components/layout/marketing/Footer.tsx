@@ -36,13 +36,13 @@ const socialLinks = [
 
 /**
  * Marketing Footer — Server Component.
- * Fixed rich dark background (#0A0B1A) with forced high-contrast white text on all children.
+ * Uses bg-bg-inverse token (always-dark surface, intentional by design in both themes).
  */
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="mt-auto border-t border-white/10 bg-[#0A0B1A] !text-white">
+    <footer className="mt-auto border-t border-white/10 bg-bg-inverse !text-white">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 text-start">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
           {/* Column 1: Logo + Short description + Social Icons */}
